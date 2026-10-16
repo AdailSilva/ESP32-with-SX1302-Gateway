@@ -1,0 +1,10 @@
+## IDF Component Manager Manifest File
+## ESP-IDF >= 6.0 no longer ships esp-mqtt inside the framework;
+## it is fetched from the ESP Component Registry (managed_components/).
+dependencies:
+  idf:
+    version: ">=5.0"
+  espressif/mqtt:
+    version: "*"
+    rules:
+      - if: "idf_version >=6.0"

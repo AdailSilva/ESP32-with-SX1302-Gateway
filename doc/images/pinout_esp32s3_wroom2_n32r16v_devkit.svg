@@ -1,0 +1,319 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="1286" viewBox="0 0 1240 1286" role="img" aria-label="ESP32-S3-WROOM-2 (N32R16V) DevKitC-1 (2 × 22) — pinagem do gateway">
+<title>ESP32-S3-WROOM-2 (N32R16V) DevKitC-1 (2 × 22) — pinagem do gateway</title>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#d1d5db"/><line x1="0" y1="0" x2="0" y2="6" stroke="#9ca3af" stroke-width="3"/></pattern><filter id="sh" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.18"/></filter><linearGradient id="pcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e293b"/><stop offset="1" stop-color="#0f172a"/></linearGradient><linearGradient id="pcbS3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e3a5f"/><stop offset="1" stop-color="#0b2540"/></linearGradient><linearGradient id="hat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#065f46"/><stop offset="1" stop-color="#064e3b"/></linearGradient><linearGradient id="ban" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="0.55" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0e7490"/></linearGradient></defs>
+<rect x="1" y="1" width="1238" height="1284" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+<text x="620.0" y="44.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="24" fill="#0f172a" text-anchor="middle" font-weight="700" >ESP32-S3-WROOM-2 (N32R16V) DevKitC-1 (2 × 22) — pinagem do gateway</text>
+<text x="620.0" y="72.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#475569" text-anchor="middle" font-weight="normal" >IDF_TARGET = esp32s3 · SPI no FSPI/SPI2 (IOMUX) · console no USB nativo (/dev/ttyACM0)</text>
+<text x="620.0" y="96.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#64748b" text-anchor="middle" font-weight="normal" >Vista de cima · conector USB para baixo · o que vale é o número do GPIO impresso na placa</text>
+<rect x="475.0" y="120" width="290" height="930" rx="12" fill="url(#pcbS3)" filter="url(#sh)"/>
+<rect x="505.0" y="134" width="230" height="160" rx="6" fill="#cbd5e1" stroke="#94a3b8"/>
+<rect x="515.0" y="164" width="210" height="120" rx="4" fill="#e2e8f0" stroke="#94a3b8"/>
+<text x="620.0" y="192.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="middle" font-weight="700" >ESP32-S3-WROOM-2</text>
+<text x="620.0" y="212.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal" >Xtensa LX7 dual-core</text>
+<text x="620.0" y="232.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal" >240 MHz · 512 KB SRAM</text>
+<text x="620.0" y="252.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal" >Flash 32 MB + PSRAM 16 MB</text>
+<text x="620.0" y="272.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#0f172a" text-anchor="middle" font-weight="normal" >(octais, 1,8 V)</text>
+<path d="M517.0 142 L531.0 154 L545.0 142 L559.0 154 L573.0 142 L587.0 154 L601.0 142 L615.0 154 L629.0 142 L643.0 154 L657.0 142 L671.0 154 L685.0 142 L699.0 154" stroke="#b45309" stroke-width="3" fill="none"/>
+<rect x="515.0" y="1024" width="60" height="34" rx="5" fill="#94a3b8" stroke="#475569"/>
+<text x="545.0" y="1076.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#ca8a04" text-anchor="middle" font-weight="700" >UART</text>
+<rect x="625.0" y="1024" width="60" height="34" rx="5" fill="#94a3b8" stroke="#475569"/>
+<text x="655.0" y="1076.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#ca8a04" text-anchor="middle" font-weight="700" >USB nativo</text>
+<rect x="500.0" y="311" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="320" r="5" fill="#1f2937"/>
+<text x="525.0" y="324.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="start" font-weight="700" >3V3</text>
+<text x="495.0" y="324.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >1</text>
+<line x1="449.0" y1="320" x2="435.0" y2="320" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="267.2" y="310.0" width="163.8" height="20" rx="10.0" fill="#cbd5e1" stroke="#94a3b8"/>
+<text x="349.1" y="324.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#1e293b" text-anchor="middle" font-weight="600" >3V3 (não ligar ao HAT)</text>
+<rect x="500.0" y="341" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="350" r="5" fill="#1f2937"/>
+<text x="525.0" y="354.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="start" font-weight="700" >3V3</text>
+<text x="495.0" y="354.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >2</text>
+<line x1="449.0" y1="350" x2="435.0" y2="350" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="394.8" y="340.0" width="36.2" height="20" rx="10.0" fill="#cbd5e1" stroke="#94a3b8"/>
+<text x="412.9" y="354.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#1e293b" text-anchor="middle" font-weight="600" >3V3</text>
+<rect x="500.0" y="371" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="380" r="5" fill="#1f2937"/>
+<text x="525.0" y="384.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="start" font-weight="700" >RST</text>
+<text x="495.0" y="384.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >3</text>
+<line x1="449.0" y1="380" x2="435.0" y2="380" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="361.2" y="370.0" width="69.8" height="20" rx="10.0" fill="#cbd5e1" stroke="#94a3b8"/>
+<text x="396.1" y="384.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#1e293b" text-anchor="middle" font-weight="600" >RST / EN</text>
+<rect x="500.0" y="401" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="410" r="5" fill="#1f2937"/>
+<text x="525.0" y="414.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="start" font-weight="700" >GPIO4</text>
+<text x="495.0" y="414.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >4</text>
+<line x1="475.0" y1="410" x2="435.0" y2="410" stroke="#16a34a" stroke-width="2.5"/>
+<rect x="341.1" y="400.0" width="89.9" height="20" rx="10.0" fill="#16a34a"/>
+<text x="386.0" y="414.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >SDA ↔ HAT 3</text>
+<rect x="500.0" y="431" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="440" r="5" fill="#1f2937"/>
+<text x="525.0" y="444.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="start" font-weight="700" >GPIO5</text>
+<text x="495.0" y="444.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >5</text>
+<line x1="475.0" y1="440" x2="435.0" y2="440" stroke="#16a34a" stroke-width="2.5"/>
+<rect x="341.1" y="430.0" width="89.9" height="20" rx="10.0" fill="#16a34a"/>
+<text x="386.0" y="444.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >SCL → HAT 5</text>
+<rect x="500.0" y="461" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="470" r="5" fill="#1f2937"/>
+<text x="525.0" y="474.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="start" font-weight="700" >GPIO6</text>
+<text x="495.0" y="474.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >6</text>
+<line x1="475.0" y1="470" x2="435.0" y2="470" stroke="#ea580c" stroke-width="2.5"/>
+<rect x="186.5" y="460.0" width="244.5" height="20" rx="10.0" fill="#ea580c"/>
+<text x="308.8" y="474.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >RESET SX1302 → HAT 11 (ativo alto)</text>
+<rect x="500.0" y="491" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="500" r="5" fill="#1f2937"/>
+<text x="525.0" y="504.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="start" font-weight="700" >GPIO7</text>
+<text x="495.0" y="504.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >7</text>
+<line x1="475.0" y1="500" x2="435.0" y2="500" stroke="#ea580c" stroke-width="2.5"/>
+<rect x="152.9" y="490.0" width="278.1" height="20" rx="10.0" fill="#ea580c"/>
+<text x="292.0" y="504.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >CS SX1261 → HAT 31 (fica em nível alto)</text>
+<rect x="500.0" y="521" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="530" r="5" fill="#1f2937"/>
+<text x="525.0" y="534.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="start" font-weight="700" >GPIO15</text>
+<text x="495.0" y="534.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >8</text>
+<rect x="500.0" y="551" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="560" r="5" fill="#1f2937"/>
+<text x="525.0" y="564.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="start" font-weight="700" >GPIO16</text>
+<text x="495.0" y="564.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >9</text>
+<line x1="449.0" y1="560" x2="435.0" y2="560" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="226.8" y="550.0" width="204.2" height="20" rx="10.0" fill="#e5e7eb" stroke="#94a3b8"/>
+<text x="328.9" y="564.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#374151" text-anchor="middle" font-weight="600" >livre · sugestão: PPS do GPS</text>
+<rect x="500.0" y="581" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="590" r="5" fill="#1f2937"/>
+<text x="525.0" y="594.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="start" font-weight="700" >GPIO17</text>
+<text x="495.0" y="594.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >10</text>
+<line x1="475.0" y1="590" x2="435.0" y2="590" stroke="#9333ea" stroke-width="2.5"/>
+<rect x="240.3" y="580.0" width="190.7" height="20" rx="10.0" fill="#9333ea"/>
+<text x="335.6" y="594.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >GPS RXD → HAT 8 (opcional)</text>
+<rect x="500.0" y="611" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="620" r="5" fill="#1f2937"/>
+<text x="525.0" y="624.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="start" font-weight="700" >GPIO18</text>
+<text x="495.0" y="624.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >11</text>
+<line x1="475.0" y1="620" x2="435.0" y2="620" stroke="#9333ea" stroke-width="2.5"/>
+<rect x="233.6" y="610.0" width="197.4" height="20" rx="10.0" fill="#9333ea"/>
+<text x="332.3" y="624.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >GPS TXD ← HAT 10 (opcional)</text>
+<rect x="500.0" y="641" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="650" r="5" fill="#1f2937"/>
+<text x="525.0" y="654.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="start" font-weight="700" >GPIO8</text>
+<text x="495.0" y="654.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >12</text>
+<rect x="500.0" y="671" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="680" r="5" fill="#1f2937"/>
+<text x="525.0" y="684.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="start" font-weight="700" >GPIO3</text>
+<text x="495.0" y="684.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >13</text>
+<line x1="449.0" y1="680" x2="435.0" y2="680" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="294.0" y="670.0" width="137.0" height="20" rx="10.0" fill="url(#hatch)"/>
+<text x="362.5" y="684.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#374151" text-anchor="middle" font-weight="600" >✗ strapping (JTAG)</text>
+<rect x="500.0" y="701" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="710" r="5" fill="#1f2937"/>
+<text x="525.0" y="714.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="start" font-weight="700" >GPIO46</text>
+<text x="495.0" y="714.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >14</text>
+<line x1="449.0" y1="710" x2="435.0" y2="710" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="341.1" y="700.0" width="89.9" height="20" rx="10.0" fill="url(#hatch)"/>
+<text x="386.0" y="714.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#374151" text-anchor="middle" font-weight="600" >✗ strapping</text>
+<rect x="500.0" y="731" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="740" r="5" fill="#1f2937"/>
+<text x="525.0" y="744.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="start" font-weight="700" >GPIO9</text>
+<text x="495.0" y="744.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >15</text>
+<rect x="500.0" y="761" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="770" r="5" fill="#1f2937"/>
+<text x="525.0" y="774.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="start" font-weight="700" >GPIO10</text>
+<text x="495.0" y="774.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >16</text>
+<line x1="475.0" y1="770" x2="435.0" y2="770" stroke="#2563eb" stroke-width="2.5"/>
+<rect x="253.7" y="760.0" width="177.3" height="20" rx="10.0" fill="#2563eb"/>
+<text x="342.4" y="774.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >CS SX1302 → HAT 24 (CE0)</text>
+<rect x="500.0" y="791" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="800" r="5" fill="#1f2937"/>
+<text x="525.0" y="804.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="start" font-weight="700" >GPIO11</text>
+<text x="495.0" y="804.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >17</text>
+<line x1="475.0" y1="800" x2="435.0" y2="800" stroke="#2563eb" stroke-width="2.5"/>
+<rect x="327.6" y="790.0" width="103.4" height="20" rx="10.0" fill="#2563eb"/>
+<text x="379.3" y="804.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >MOSI → HAT 19</text>
+<rect x="500.0" y="821" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="830" r="5" fill="#1f2937"/>
+<text x="525.0" y="834.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="start" font-weight="700" >GPIO12</text>
+<text x="495.0" y="834.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >18</text>
+<line x1="475.0" y1="830" x2="435.0" y2="830" stroke="#2563eb" stroke-width="2.5"/>
+<rect x="327.6" y="820.0" width="103.4" height="20" rx="10.0" fill="#2563eb"/>
+<text x="379.3" y="834.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >SCLK → HAT 23</text>
+<rect x="500.0" y="851" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="860" r="5" fill="#1f2937"/>
+<text x="525.0" y="864.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="start" font-weight="700" >GPIO13</text>
+<text x="495.0" y="864.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >19</text>
+<line x1="475.0" y1="860" x2="435.0" y2="860" stroke="#2563eb" stroke-width="2.5"/>
+<rect x="327.6" y="850.0" width="103.4" height="20" rx="10.0" fill="#2563eb"/>
+<text x="379.3" y="864.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >MISO ← HAT 21</text>
+<rect x="500.0" y="881" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="890" r="5" fill="#1f2937"/>
+<text x="525.0" y="894.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="start" font-weight="700" >GPIO14</text>
+<text x="495.0" y="894.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >20</text>
+<rect x="500.0" y="911" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="920" r="5" fill="#1f2937"/>
+<text x="525.0" y="924.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="start" font-weight="700" >5V</text>
+<text x="495.0" y="924.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >21</text>
+<line x1="475.0" y1="920" x2="435.0" y2="920" stroke="#dc2626" stroke-width="2.5"/>
+<rect x="314.2" y="910.0" width="116.8" height="20" rx="10.0" fill="#dc2626"/>
+<text x="372.6" y="924.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >5V → HAT 2 ou 4</text>
+<rect x="500.0" y="941" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="509.0" cy="950" r="5" fill="#1f2937"/>
+<text x="525.0" y="954.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="start" font-weight="700" >GND</text>
+<text x="495.0" y="954.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="end" font-weight="normal" >22</text>
+<line x1="475.0" y1="950" x2="435.0" y2="950" stroke="#1f2937" stroke-width="2.5"/>
+<rect x="341.1" y="940.0" width="89.9" height="20" rx="10.0" fill="#1f2937"/>
+<text x="386.0" y="954.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >GND → HAT 6</text>
+<rect x="722.0" y="311" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="320" r="5" fill="#1f2937"/>
+<text x="715.0" y="324.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="end" font-weight="700" >GND</text>
+<text x="745.0" y="324.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >1</text>
+<line x1="765.0" y1="320" x2="805.0" y2="320" stroke="#1f2937" stroke-width="2.5"/>
+<rect x="809.0" y="310.0" width="36.2" height="20" rx="10.0" fill="#1f2937"/>
+<text x="827.1" y="324.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >GND</text>
+<rect x="722.0" y="341" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="350" r="5" fill="#1f2937"/>
+<text x="715.0" y="354.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="end" font-weight="700" >GPIO43</text>
+<text x="745.0" y="354.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >2</text>
+<line x1="765.0" y1="350" x2="805.0" y2="350" stroke="#ca8a04" stroke-width="2.5"/>
+<rect x="809.0" y="340.0" width="89.9" height="20" rx="10.0" fill="#ca8a04"/>
+<text x="854.0" y="354.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >TX0 · UART0</text>
+<rect x="722.0" y="371" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="380" r="5" fill="#1f2937"/>
+<text x="715.0" y="384.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="end" font-weight="700" >GPIO44</text>
+<text x="745.0" y="384.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >3</text>
+<line x1="765.0" y1="380" x2="805.0" y2="380" stroke="#ca8a04" stroke-width="2.5"/>
+<rect x="809.0" y="370.0" width="89.9" height="20" rx="10.0" fill="#ca8a04"/>
+<text x="854.0" y="384.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >RX0 · UART0</text>
+<rect x="722.0" y="401" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="410" r="5" fill="#1f2937"/>
+<text x="715.0" y="414.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="end" font-weight="700" >GPIO1</text>
+<text x="745.0" y="414.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >4</text>
+<rect x="722.0" y="431" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="440" r="5" fill="#1f2937"/>
+<text x="715.0" y="444.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="end" font-weight="700" >GPIO2</text>
+<text x="745.0" y="444.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >5</text>
+<rect x="722.0" y="461" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="470" r="5" fill="#1f2937"/>
+<text x="715.0" y="474.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="end" font-weight="700" >GPIO42</text>
+<text x="745.0" y="474.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >6</text>
+<rect x="722.0" y="491" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="500" r="5" fill="#1f2937"/>
+<text x="715.0" y="504.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="end" font-weight="700" >GPIO41</text>
+<text x="745.0" y="504.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >7</text>
+<rect x="722.0" y="521" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="530" r="5" fill="#1f2937"/>
+<text x="715.0" y="534.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="end" font-weight="700" >GPIO40</text>
+<text x="745.0" y="534.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >8</text>
+<rect x="722.0" y="551" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="560" r="5" fill="#1f2937"/>
+<text x="715.0" y="564.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="end" font-weight="700" >GPIO39</text>
+<text x="745.0" y="564.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >9</text>
+<rect x="722.0" y="581" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="590" r="5" fill="#1f2937"/>
+<text x="715.0" y="594.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="end" font-weight="700" >GPIO38</text>
+<text x="745.0" y="594.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >10</text>
+<rect x="722.0" y="611" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="620" r="5" fill="#1f2937"/>
+<text x="715.0" y="624.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="end" font-weight="700" >GPIO37</text>
+<text x="745.0" y="624.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >11</text>
+<line x1="791.0" y1="620" x2="805.0" y2="620" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="809.0" y="610.0" width="103.4" height="20" rx="10.0" fill="url(#hatch)"/>
+<text x="860.7" y="624.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#374151" text-anchor="middle" font-weight="600" >✗ PSRAM octal</text>
+<rect x="722.0" y="641" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="650" r="5" fill="#1f2937"/>
+<text x="715.0" y="654.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="end" font-weight="700" >GPIO36</text>
+<text x="745.0" y="654.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >12</text>
+<line x1="791.0" y1="650" x2="805.0" y2="650" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="809.0" y="640.0" width="103.4" height="20" rx="10.0" fill="url(#hatch)"/>
+<text x="860.7" y="654.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#374151" text-anchor="middle" font-weight="600" >✗ PSRAM octal</text>
+<rect x="722.0" y="671" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="680" r="5" fill="#1f2937"/>
+<text x="715.0" y="684.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="end" font-weight="700" >GPIO35</text>
+<text x="745.0" y="684.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >13</text>
+<line x1="791.0" y1="680" x2="805.0" y2="680" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="809.0" y="670.0" width="103.4" height="20" rx="10.0" fill="url(#hatch)"/>
+<text x="860.7" y="684.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#374151" text-anchor="middle" font-weight="600" >✗ PSRAM octal</text>
+<rect x="722.0" y="701" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="710" r="5" fill="#1f2937"/>
+<text x="715.0" y="714.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="end" font-weight="700" >GPIO0</text>
+<text x="745.0" y="714.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >14</text>
+<line x1="765.0" y1="710" x2="805.0" y2="710" stroke="#0891b2" stroke-width="2.5"/>
+<rect x="809.0" y="700.0" width="184.0" height="20" rx="10.0" fill="#0891b2"/>
+<text x="901.0" y="714.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >Botão BOOT → modo Soft AP</text>
+<rect x="722.0" y="731" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="740" r="5" fill="#1f2937"/>
+<text x="715.0" y="744.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="end" font-weight="700" >GPIO45</text>
+<text x="745.0" y="744.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >15</text>
+<line x1="791.0" y1="740" x2="805.0" y2="740" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="809.0" y="730.0" width="157.1" height="20" rx="10.0" fill="url(#hatch)"/>
+<text x="887.6" y="744.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#374151" text-anchor="middle" font-weight="600" >✗ strapping (VDD_SPI)</text>
+<rect x="722.0" y="761" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="770" r="5" fill="#1f2937"/>
+<text x="715.0" y="774.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="end" font-weight="700" >GPIO48</text>
+<text x="745.0" y="774.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >16</text>
+<line x1="791.0" y1="770" x2="805.0" y2="770" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="809.0" y="760.0" width="184.0" height="20" rx="10.0" fill="url(#hatch)"/>
+<text x="901.0" y="774.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#374151" text-anchor="middle" font-weight="600" >✗ domínio 1,8 V (LED RGB)</text>
+<rect x="722.0" y="791" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="800" r="5" fill="#1f2937"/>
+<text x="715.0" y="804.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="end" font-weight="700" >GPIO47</text>
+<text x="745.0" y="804.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >17</text>
+<line x1="791.0" y1="800" x2="805.0" y2="800" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="809.0" y="790.0" width="116.8" height="20" rx="10.0" fill="url(#hatch)"/>
+<text x="867.4" y="804.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#374151" text-anchor="middle" font-weight="600" >✗ domínio 1,8 V</text>
+<rect x="722.0" y="821" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="830" r="5" fill="#1f2937"/>
+<text x="715.0" y="834.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#e2e8f0" text-anchor="end" font-weight="700" >GPIO21</text>
+<text x="745.0" y="834.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >18</text>
+<rect x="722.0" y="851" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="860" r="5" fill="#1f2937"/>
+<text x="715.0" y="864.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="end" font-weight="700" >GPIO20</text>
+<text x="745.0" y="864.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >19</text>
+<line x1="765.0" y1="860" x2="805.0" y2="860" stroke="#ca8a04" stroke-width="2.5"/>
+<rect x="809.0" y="850.0" width="170.6" height="20" rx="10.0" fill="#ca8a04"/>
+<text x="894.3" y="864.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >USB D+ · console nativo</text>
+<rect x="722.0" y="881" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="890" r="5" fill="#1f2937"/>
+<text x="715.0" y="894.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="end" font-weight="700" >GPIO19</text>
+<text x="745.0" y="894.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >20</text>
+<line x1="765.0" y1="890" x2="805.0" y2="890" stroke="#ca8a04" stroke-width="2.5"/>
+<rect x="809.0" y="880.0" width="170.6" height="20" rx="10.0" fill="#ca8a04"/>
+<text x="894.3" y="894.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >USB D− · console nativo</text>
+<rect x="722.0" y="911" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="920" r="5" fill="#1f2937"/>
+<text x="715.0" y="924.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="end" font-weight="700" >GND</text>
+<text x="745.0" y="924.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >21</text>
+<line x1="765.0" y1="920" x2="805.0" y2="920" stroke="#1f2937" stroke-width="2.5"/>
+<rect x="809.0" y="910.0" width="36.2" height="20" rx="10.0" fill="#1f2937"/>
+<text x="827.1" y="924.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >GND</text>
+<rect x="722.0" y="941" width="18" height="18" rx="3" fill="#fbbf24" stroke="#92400e"/>
+<circle cx="731.0" cy="950" r="5" fill="#1f2937"/>
+<text x="715.0" y="954.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#ffffff" text-anchor="end" font-weight="700" >GND</text>
+<text x="745.0" y="954.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="start" font-weight="normal" >22</text>
+<line x1="765.0" y1="950" x2="805.0" y2="950" stroke="#1f2937" stroke-width="2.5"/>
+<rect x="809.0" y="940.0" width="36.2" height="20" rx="10.0" fill="#1f2937"/>
+<text x="827.1" y="954.3" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="600" >GND</text>
+<text x="70.0" y="1112.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#334155" text-anchor="start" font-weight="700" >Legenda</text>
+<rect x="70" y="1126" width="26" height="16" rx="8" fill="#2563eb"/>
+<text x="104.0" y="1138.5" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >SPI (SX1302)</text>
+<rect x="350" y="1126" width="26" height="16" rx="8" fill="#ea580c"/>
+<text x="384.0" y="1138.5" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >Controle (RESET / CS SX1261)</text>
+<rect x="630" y="1126" width="26" height="16" rx="8" fill="#16a34a"/>
+<text x="664.0" y="1138.5" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >I2C (sensor de temperatura)</text>
+<rect x="910" y="1126" width="26" height="16" rx="8" fill="#9333ea"/>
+<text x="944.0" y="1138.5" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >UART GPS (opcional)</text>
+<rect x="70" y="1150" width="26" height="16" rx="8" fill="#dc2626"/>
+<text x="104.0" y="1162.5" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >Alimentação 5 V</text>
+<rect x="350" y="1150" width="26" height="16" rx="8" fill="#1f2937"/>
+<text x="384.0" y="1162.5" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >GND</text>
+<rect x="630" y="1150" width="26" height="16" rx="8" fill="#0891b2"/>
+<text x="664.0" y="1162.5" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >Na própria placa (BOOT / LED)</text>
+<rect x="910" y="1150" width="26" height="16" rx="8" fill="#ca8a04"/>
+<text x="944.0" y="1162.5" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >Console / USB</text>
+<rect x="70" y="1174" width="26" height="16" rx="8" fill="url(#hatch)"/>
+<text x="104.0" y="1186.5" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >Não usar (flash, PSRAM, strapping)</text>
+<rect x="350" y="1174" width="26" height="16" rx="8" fill="#e5e7eb" stroke="#94a3b8"/>
+<text x="384.0" y="1186.5" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >Livre para expansão</text>
+<rect x="630" y="1174" width="26" height="16" rx="8" fill="#cbd5e1" stroke="#94a3b8"/>
+<text x="664.0" y="1186.5" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >3V3 / EN / RST</text>
+<text x="70.0" y="1224.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >• GPIO10–13 são os pinos IOMUX do SPI2: o sinal não passa pela matriz de GPIO e aguenta clock mais alto.</text>
+<text x="70.0" y="1246.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >• No WROOM-2 N32R16V, GPIO26–37 são da flash/PSRAM octal e GPIO47/48 ficam no domínio de 1,8 V. Não use.</text>
+<text x="70.0" y="1268.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="start" font-weight="normal" >• Livres para as próximas funções: GPIO1, 2, 8, 9, 14, 15, 16, 21 e 38–42.</text>
+</svg>

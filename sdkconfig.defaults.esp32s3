@@ -1,0 +1,14 @@
+# ESP32-S3-WROOM-2 (N32R16V) DevKit
+# Applied on top of sdkconfig.defaults when IDF_TARGET=esp32s3.
+
+# Console (logs + ESP32_SX1302> command line) on the chip's native USB port -> /dev/ttyACM0
+CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y
+
+# WROOM-2 N32R16V: 32 MB octal flash + 16 MB octal PSRAM (1.8 V).
+# Without these options the module does not boot.
+CONFIG_ESPTOOLPY_OCT_FLASH=y
+CONFIG_ESPTOOLPY_FLASHSIZE_32MB=y
+CONFIG_SPIRAM=y
+CONFIG_SPIRAM_MODE_OCT=y
+CONFIG_SPIRAM_SPEED_80M=y
+CONFIG_SPIRAM_USE_MALLOC=y

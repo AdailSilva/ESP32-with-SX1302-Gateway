@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="260" viewBox="0 0 1240 260" role="img" aria-label="ESP32_SX1302 — Gateway LoRaWAN de 8 canais">
+<title>ESP32_SX1302 — Gateway LoRaWAN de 8 canais</title>
+<defs><linearGradient id="ban" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="0.55" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0e7490"/></linearGradient></defs>
+<rect width="1240" height="260" rx="18" fill="url(#ban)"/>
+<line x1="1150" y1="110" x2="1150" y2="190" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/>
+<circle cx="1150" cy="110" r="10" fill="#22d3ee"/>
+<path d="M1133.2 93.2 A24 24 0 0 1 1166.8 93.2" stroke="#22d3ee" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.9"/>
+<path d="M1133.2 126.8 A24 24 0 0 1 1133.2 93.2" stroke="#22d3ee" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.54"/>
+<path d="M1166.8 93.2 A24 24 0 0 1 1166.8 126.8" stroke="#22d3ee" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.54"/>
+<path d="M1119.2 79.2 A44 44 0 0 1 1180.8 79.2" stroke="#22d3ee" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.65"/>
+<path d="M1119.2 140.8 A44 44 0 0 1 1119.2 79.2" stroke="#22d3ee" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.39"/>
+<path d="M1180.8 79.2 A44 44 0 0 1 1180.8 140.8" stroke="#22d3ee" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.39"/>
+<path d="M1105.2 65.2 A64 64 0 0 1 1194.8 65.2" stroke="#22d3ee" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.4"/>
+<path d="M1105.2 154.8 A64 64 0 0 1 1105.2 65.2" stroke="#22d3ee" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.24"/>
+<path d="M1194.8 65.2 A64 64 0 0 1 1194.8 154.8" stroke="#22d3ee" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.24"/>
+<text x="70.0" y="100.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="54" fill="#ffffff" text-anchor="start" font-weight="800" >ESP32_SX1302</text>
+<text x="72.0" y="140.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="20" fill="#bae6fd" text-anchor="start" font-weight="normal" >Gateway LoRaWAN de 8 canais · ESP32 + Semtech SX1302 (SX1302_HAL v2.1.0)</text>
+<rect x="72" y="178" width="154.678" height="30" rx="15" fill="#2563eb"/>
+<text x="149.3" y="198.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#fff" text-anchor="middle" font-weight="700" >ESP32-WROOM-32U</text>
+<rect x="234.678" y="178" width="234.28480000000002" height="30" rx="15" fill="#7c3aed"/>
+<text x="351.8" y="198.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#fff" text-anchor="middle" font-weight="700" >ESP32-S3-WROOM-2 N32R16V</text>
+<rect x="476.9628" y="178" width="278.5108" height="30" rx="15" fill="#0891b2"/>
+<text x="616.2" y="198.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#fff" text-anchor="middle" font-weight="700" >AU915 · US915 · EU868 · CN470</text>
+<rect x="763.4736" y="178" width="145.8328" height="30" rx="15" fill="#16a34a"/>
+<text x="836.4" y="198.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#fff" text-anchor="middle" font-weight="700" >UDP + MQTT/TLS</text>
+<rect x="917.3064" y="178" width="136.98760000000001" height="30" rx="15" fill="#ea580c"/>
+<text x="985.8" y="198.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#fff" text-anchor="middle" font-weight="700" >ChirpStack v4</text>
+</svg>

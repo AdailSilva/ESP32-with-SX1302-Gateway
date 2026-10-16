@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="330" viewBox="0 0 1240 330" role="img" aria-label="Alimentação do gateway">
+<title>Alimentação do gateway</title>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#d1d5db"/><line x1="0" y1="0" x2="0" y2="6" stroke="#9ca3af" stroke-width="3"/></pattern><filter id="sh" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.18"/></filter><linearGradient id="pcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e293b"/><stop offset="1" stop-color="#0f172a"/></linearGradient><linearGradient id="pcbS3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e3a5f"/><stop offset="1" stop-color="#0b2540"/></linearGradient><linearGradient id="hat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#065f46"/><stop offset="1" stop-color="#064e3b"/></linearGradient><linearGradient id="ban" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="0.55" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0e7490"/></linearGradient></defs>
+<rect x="1" y="1" width="1238" height="328" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+<text x="620.0" y="44.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="22" fill="#0f172a" text-anchor="middle" font-weight="700" >Alimentação recomendada</text>
+<rect x="80" y="110" width="240" height="120" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="2.5"/>
+<text x="200.0" y="160.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="20" fill="#991b1b" text-anchor="middle" font-weight="700" >Fonte 5 V</text>
+<text x="200.0" y="186.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#991b1b" text-anchor="middle" font-weight="600" >mínimo 2 A</text>
+<rect x="880" y="80" width="280" height="70" rx="12" fill="url(#hat)"/>
+<text x="1020.0" y="112.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#fff" text-anchor="middle" font-weight="700" >LR1302 HAT</text>
+<text x="1020.0" y="134.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#a7f3d0" text-anchor="middle" font-weight="normal" >pino 2 (ou 4) = 5V · pino 6 = GND</text>
+<rect x="880" y="190" width="280" height="70" rx="12" fill="url(#pcb)"/>
+<text x="1020.0" y="222.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#fff" text-anchor="middle" font-weight="700" >ESP32 / ESP32-S3 DevKit</text>
+<text x="1020.0" y="244.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="normal" >5V (VIN) · GND</text>
+<path d="M320 150 C 600 150, 600 105, 880 105" stroke="#dc2626" stroke-width="5" fill="none"/>
+<path d="M320 150 C 600 150, 600 215, 880 215" stroke="#dc2626" stroke-width="5" fill="none"/>
+<path d="M320 195 C 620 195, 620 125, 880 125" stroke="#1f2937" stroke-width="5" fill="none" stroke-dasharray="2 0"/>
+<path d="M320 195 C 620 195, 620 235, 880 235" stroke="#1f2937" stroke-width="5" fill="none" stroke-dasharray="2 0"/>
+<text x="560.0" y="120.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#dc2626" text-anchor="middle" font-weight="700" >+5 V</text>
+<text x="560.0" y="262.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#1f2937" text-anchor="middle" font-weight="700" >GND comum</text>
+<text x="620.0" y="300.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="middle" font-weight="normal" >Os picos de corrente na transmissão LoRa podem derrubar o USB do PC e resetar o SX1302 no meio de um TX. Em uso contínuo, use a fonte de 5 V.</text>
+</svg>

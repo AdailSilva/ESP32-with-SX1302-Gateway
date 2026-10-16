@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="550" viewBox="0 0 1240 550" role="img" aria-label="Os dois alvos do firmware">
+<title>Os dois alvos do firmware</title>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#d1d5db"/><line x1="0" y1="0" x2="0" y2="6" stroke="#9ca3af" stroke-width="3"/></pattern><filter id="sh" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.18"/></filter><linearGradient id="pcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e293b"/><stop offset="1" stop-color="#0f172a"/></linearGradient><linearGradient id="pcbS3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e3a5f"/><stop offset="1" stop-color="#0b2540"/></linearGradient><linearGradient id="hat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#065f46"/><stop offset="1" stop-color="#064e3b"/></linearGradient><linearGradient id="ban" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="0.55" stop-color="#1e3a8a"/><stop offset="1" stop-color="#0e7490"/></linearGradient></defs>
+<rect x="1" y="1" width="1238" height="548" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+<text x="620.0" y="44.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="24" fill="#0f172a" text-anchor="middle" font-weight="700" >Um código-fonte, dois firmwares</text>
+<text x="620.0" y="70.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#475569" text-anchor="middle" font-weight="normal" >Tudo o que existe hoje roda nas duas placas · as novas funções entram no ESP32-S3</text>
+<rect x="70" y="100" width="520" height="420" rx="16" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5" filter="url(#sh)"/>
+<rect x="70" y="100" width="520" height="70" rx="16" fill="#2563eb"/>
+<rect x="70" y="150" width="520" height="20" fill="#2563eb"/>
+<text x="330.0" y="132.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="18" fill="#fff" text-anchor="middle" font-weight="700" >ESP32-WROOM-32U DevKit</text>
+<text x="330.0" y="156.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="13" fill="#e0e7ff" text-anchor="middle" font-weight="normal" >IDF_TARGET = esp32</text>
+<text x="100.0" y="204.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#475569" text-anchor="start" font-weight="700" >CPU</text>
+<text x="230.0" y="204.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="normal" >LX6 dual-core 240 MHz</text>
+<line x1="100" y1="216" x2="560" y2="216" stroke="#e2e8f0"/>
+<text x="100.0" y="238.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#475569" text-anchor="start" font-weight="700" >RAM</text>
+<text x="230.0" y="238.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="normal" >520 KB SRAM · sem PSRAM</text>
+<line x1="100" y1="250" x2="560" y2="250" stroke="#e2e8f0"/>
+<text x="100.0" y="272.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#475569" text-anchor="start" font-weight="700" >Flash</text>
+<text x="230.0" y="272.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="normal" >4 MB (típico)</text>
+<line x1="100" y1="284" x2="560" y2="284" stroke="#e2e8f0"/>
+<text x="100.0" y="306.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#475569" text-anchor="start" font-weight="700" >Wi-Fi</text>
+<text x="230.0" y="306.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="normal" >antena externa u.FL</text>
+<line x1="100" y1="318" x2="560" y2="318" stroke="#e2e8f0"/>
+<text x="100.0" y="340.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#475569" text-anchor="start" font-weight="700" >Console</text>
+<text x="230.0" y="340.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="normal" >UART0 · /dev/ttyUSB0</text>
+<line x1="100" y1="352" x2="560" y2="352" stroke="#e2e8f0"/>
+<text x="100.0" y="374.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#475569" text-anchor="start" font-weight="700" >SPI do HAT</text>
+<text x="230.0" y="374.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="normal" >VSPI · SPI3_HOST</text>
+<line x1="100" y1="386" x2="560" y2="386" stroke="#e2e8f0"/>
+<text x="100.0" y="430.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#0f172a" text-anchor="start" font-weight="600" >✔ Todas as funções atuais</text>
+<text x="100.0" y="460.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#0f172a" text-anchor="start" font-weight="600" >✔ Buffers TLS dinâmicos (RAM justa)</text>
+<text x="100.0" y="490.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#0f172a" text-anchor="start" font-weight="600" >— Recebe só correções e ajustes</text>
+<rect x="650" y="100" width="520" height="420" rx="16" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2.5" filter="url(#sh)"/>
+<rect x="650" y="100" width="520" height="70" rx="16" fill="#7c3aed"/>
+<rect x="650" y="150" width="520" height="20" fill="#7c3aed"/>
+<text x="910.0" y="132.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="18" fill="#fff" text-anchor="middle" font-weight="700" >ESP32-S3-WROOM-2 (N32R16V) DevKit</text>
+<text x="910.0" y="156.0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="13" fill="#e0e7ff" text-anchor="middle" font-weight="normal" >IDF_TARGET = esp32s3</text>
+<text x="680.0" y="204.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#475569" text-anchor="start" font-weight="700" >CPU</text>
+<text x="810.0" y="204.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="normal" >LX7 dual-core 240 MHz</text>
+<line x1="680" y1="216" x2="1140" y2="216" stroke="#e2e8f0"/>
+<text x="680.0" y="238.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#475569" text-anchor="start" font-weight="700" >RAM</text>
+<text x="810.0" y="238.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="normal" >512 KB SRAM + 16 MB PSRAM</text>
+<line x1="680" y1="250" x2="1140" y2="250" stroke="#e2e8f0"/>
+<text x="680.0" y="272.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#475569" text-anchor="start" font-weight="700" >Flash</text>
+<text x="810.0" y="272.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="normal" >32 MB octal</text>
+<line x1="680" y1="284" x2="1140" y2="284" stroke="#e2e8f0"/>
+<text x="680.0" y="306.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#475569" text-anchor="start" font-weight="700" >Wi-Fi</text>
+<text x="810.0" y="306.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="normal" >antena de PCB</text>
+<line x1="680" y1="318" x2="1140" y2="318" stroke="#e2e8f0"/>
+<text x="680.0" y="340.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#475569" text-anchor="start" font-weight="700" >Console</text>
+<text x="810.0" y="340.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="normal" >USB nativo · /dev/ttyACM0</text>
+<line x1="680" y1="352" x2="1140" y2="352" stroke="#e2e8f0"/>
+<text x="680.0" y="374.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#475569" text-anchor="start" font-weight="700" >SPI do HAT</text>
+<text x="810.0" y="374.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#0f172a" text-anchor="start" font-weight="normal" >FSPI · SPI2_HOST (IOMUX)</text>
+<line x1="680" y1="386" x2="1140" y2="386" stroke="#e2e8f0"/>
+<text x="680.0" y="430.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#0f172a" text-anchor="start" font-weight="600" >✔ Todas as funções atuais</text>
+<text x="680.0" y="460.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#7c3aed" text-anchor="start" font-weight="600" >★ + funções novas (ver roadmap)</text>
+<text x="680.0" y="490.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#7c3aed" text-anchor="start" font-weight="600" >★ PSRAM para filas, TLS e buffers</text>
+</svg>

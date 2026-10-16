@@ -1,0 +1,68 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  firmware:
+    name: ${{ matrix.board }}
+    runs-on: ubuntu-latest
+    container: espressif/idf:v5.5.1
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: esp32
+            board: ESP32-WROOM-32U_DevKit
+          - target: esp32s3
+            board: ESP32-S3-WROOM-2_N32R16V_DevKit
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        shell: bash
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          . "$IDF_PATH/export.sh"
+          sh scripts/build.sh ${{ matrix.target }}
+
+      - name: Collect binaries
+        shell: bash
+        run: |
+          ver=$(sed -n 's/.*ESP32_SX1302_VERSION "\(.*\)".*/\1/p' main/packet_forwarder/loragw_version.h)
+          if [ "${GITHUB_REF_TYPE}" = "tag" ] && [ "${GITHUB_REF_NAME}" != "v$ver" ]; then
+            echo "::error::tag ${GITHUB_REF_NAME} != firmware version v$ver (main/packet_forwarder/loragw_version.h)"
+            exit 1
+          fi
+          b=build-${{ matrix.target }}
+          d=dist/${{ matrix.board }}
+          mkdir -p "$d"
+          cp $b/ESP32_SX1302-Pkt-Fwd.bin            "$d/esp32_sx1302-$ver-${{ matrix.target }}.bin"
+          cp $b/bootloader/bootloader.bin           "$d/bootloader-${{ matrix.target }}.bin"
+          cp $b/partition_table/partition-table.bin "$d/partition-table-${{ matrix.target }}.bin"
+          cp $b/flasher_args.json                   "$d/flasher_args-${{ matrix.target }}.json"
+          ls -l "$d"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.board }}
+          path: dist/${{ matrix.board }}/*
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: firmware
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/**/*
+          generate_release_notes: true

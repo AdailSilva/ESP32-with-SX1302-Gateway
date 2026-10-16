@@ -1,0 +1,96 @@
+#!/bin/sh
+
+#
+# Note: only run this script after you have already run '. export.sh' under 'esp-idf'.
+#
+# Dennis Deng (ddeng@semtech.com)
+#
+
+pth=`pwd`
+
+esp="$IDF_PYTHON_ENV_PATH/bin/python $IDF_PATH/components/esptool_py/esptool/esptool.py"
+tty="--port /dev/ttyUSB0 --baud 921600"
+args="--chip esp32 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 40m --flash_size detect"
+bootloader="0x1000 $pth/build/bootloader/bootloader.bin"
+app="0x10000 $pth/build/ESP32_SX1302-Pkt-Fwd.bin"
+part="0x8000 $pth/build/partition_table/partition-table.bin"
+
+
+if [ "$#" -eq 0 -o "$1" = "-h" -o "$1" = "--help" ]; then
+	echo "Usage: $0 [make|make_all|flash|flash_all|run]\n"
+	exit
+fi
+
+prepare_c_head_file_from_files() {
+	pkt_dir=main/packet_forwarder
+
+	web_hd_name=$pkt_dir/webpage.h
+	hd_name=$pkt_dir/global_json.h
+	web_file=$pkt_dir/webpage.html
+	conf_dir=$pkt_dir/global_conf.json
+
+	json_cn_file=$conf_dir/global_conf.cn490.json
+	json_eu_file=$conf_dir/global_conf.eu868.json
+	json_us_file=$conf_dir/global_conf.us915.json
+	json_au0_file=$conf_dir/global_conf.au915_sb0.json
+	json_au1_file=$conf_dir/global_conf.au915_sb1.json
+
+	# prepare the webpage by dumping it to a string
+	scripts/dump_html.py $web_file webpage_str > $web_hd_name
+
+	# prepare the C array comes from global_conf.cn490.json
+	echo '// dump from global_conf.cn490.json as string array' > $hd_name
+	echo 'const static uint8_t global_cn_conf[] = {' >> $hd_name
+	scripts/json_to_hex_array.py $json_cn_file >> $hd_name
+	echo '};\n' >> $hd_name
+
+	# prepare the C array comes from global_conf.eu868.json
+	echo '// dump from global_conf.eu868.json as string array' >> $hd_name
+	echo 'const static uint8_t global_eu_conf[] = {' >> $hd_name
+	scripts/json_to_hex_array.py $json_eu_file >> $hd_name
+	echo '};\n' >> $hd_name
+
+	# prepare the C array comes from global_conf.us915.json
+	echo '// dump from global_conf.us915.json as string array' >> $hd_name
+	echo 'const static uint8_t global_us_conf[] = {' >> $hd_name
+	scripts/json_to_hex_array.py $json_us_file >> $hd_name
+	echo '};\n' >> $hd_name
+
+	# prepare the C array comes from global_conf.au915_sb0.json (AU915 sub-band 0: ch 0-7 + 64)
+	echo '// dump from global_conf.au915_sb0.json as string array' >> $hd_name
+	echo 'const static uint8_t global_au0_conf[] = {' >> $hd_name
+	scripts/json_to_hex_array.py $json_au0_file >> $hd_name
+	echo '};\n' >> $hd_name
+
+	# prepare the C array comes from global_conf.au915_sb1.json (AU915 sub-band 1: ch 8-15 + 65)
+	echo '// dump from global_conf.au915_sb1.json as string array' >> $hd_name
+	echo 'const static uint8_t global_au1_conf[] = {' >> $hd_name
+	scripts/json_to_hex_array.py $json_au1_file >> $hd_name
+	echo '};\n' >> $hd_name
+
+	# indent the code by prefix 4 ' '.
+	sed -i 's/^0x/    0x/; s/ *$//' $hd_name
+}
+
+if [ "$1" = "make" ]; then
+	prepare_c_head_file_from_files
+	idf.py -DCONFIG_LIBLORAGW_TEST=0 app
+fi
+
+if [ "$1" = "make_all" ]; then
+	prepare_c_head_file_from_files
+	idf.py build
+fi
+
+if [ "$1" = "flash" ]; then
+	$esp $tty $args $app
+fi
+
+# choose this when you flash ESP32 for the first time
+if [ "$1" = "flash_all" ]; then
+	$esp $tty $args $bootloader $app $part
+fi
+
+if [ "$1" = "run" -o "$2" = "run" ]; then
+	sudo minicom -D /dev/ttyUSB0 -con
+fi

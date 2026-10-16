@@ -1,0 +1,16 @@
+CONFIG_FREERTOS_USE_TRACE_FACILITY=y
+CONFIG_FREERTOS_USE_STATS_FORMATTING_FUNCTIONS=y
+CONFIG_HTTPD_MAX_REQ_HDR_LEN=2048
+CONFIG_PARTITION_TABLE_SINGLE_APP_LARGE=y
+CONFIG_PARTITION_TABLE_FILENAME="partitions_singleapp_large.csv"
+
+# --- RAM: classic ESP32 without PSRAM ---
+# The MQTTS (TLS) session used ~40 KB of RAM permanently, which left no room for
+# the thread_up stack ("Failed to spawn thread_up" -> no uplink/stats sent).
+# Dynamic buffers allocate the 16 KB TLS RX buffer only while data is being read
+# and free the CA/config data after the handshake.
+CONFIG_MBEDTLS_DYNAMIC_BUFFER=y
+CONFIG_MBEDTLS_DYNAMIC_FREE_CONFIG_DATA=y
+CONFIG_MBEDTLS_DYNAMIC_FREE_CA_CERT=y
+# Common CAs only (the broker uses the custom CA installed via web page / mqtt_cert)
+CONFIG_MBEDTLS_CERTIFICATE_BUNDLE_DEFAULT_CMN=y

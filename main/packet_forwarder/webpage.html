@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ESP32 SX1302 · Configuração</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+:root{--bg:#f2f4f6;--sf:#fff;--sf2:#f7f9fa;--fg:#17202a;--mut:#5d6b78;--line:#dde3e8;--acc:#0b7a5f;--acc2:#e1f1eb;--on:#fff;--ok:#1f9d55;--warn:#c27803;--err:#c0362c;--errbg:#fbecea;--hd:#0e2a24;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color-scheme:light}
+@media(prefers-color-scheme:dark){:root{--bg:#0f151b;--sf:#151d25;--sf2:#1a232c;--fg:#e3e9ee;--mut:#8b98a5;--line:#26313c;--acc:#35b98f;--acc2:#16302a;--on:#07211a;--ok:#3fbf7f;--warn:#e3a33b;--err:#f07a6e;--errbg:#3a1f1d;--hd:#0b1116;color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--acc)}
+.m,code{font-family:var(--mono);font-size:.92em}
+.top{position:sticky;top:0;z-index:5;background:var(--hd);color:#e8f1ee;border-bottom:1px solid rgba(255,255,255,.06)}
+.top>div{display:flex;align-items:center;gap:12px 20px;flex-wrap:wrap;padding:10px 24px;max-width:1440px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto;min-width:0}
+.brand img{width:28px;height:28px}
+.brand h1{font-size:16px;font-weight:650;margin:0;white-space:nowrap;letter-spacing:.1px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.07);font-size:12.5px;white-space:nowrap}
+.chip b{font-weight:600;color:#fff}
+.chip i{width:8px;height:8px;border-radius:50%;background:#7b8794}
+.chip i.ok{background:#3fbf7f;box-shadow:0 0 0 3px rgba(63,191,127,.22)}.chip i.warn{background:#e3a33b}
+.top nav{display:flex;gap:4px}
+.top nav a{color:#e8f1ee;text-decoration:none;font-size:13.5px;padding:6px 10px;border-radius:7px}
+.top nav a:hover{background:rgba(255,255,255,.08)}
+.wrap{max-width:1440px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:210px minmax(0,1fr);gap:40px}
+.side{position:sticky;top:76px;align-self:start;padding-top:28px}
+.side a{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;color:var(--mut);text-decoration:none;font-size:14px;border-left:2px solid transparent}
+.side a:hover{color:var(--fg);background:var(--sf)}
+.side a.on{color:var(--fg);background:var(--sf);border-left-color:var(--acc);font-weight:600}
+.side svg{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+main{padding:28px 0 0;min-width:0}
+.intro{margin-bottom:18px}
+.intro h2{margin:0;font-size:24px;font-weight:650;letter-spacing:-.2px}
+.intro p{margin:4px 0 0;color:var(--mut);font-size:14px}
+form{display:flex;flex-direction:column;gap:16px}
+#err{order:0;display:none;background:var(--errbg);color:var(--err);border:1px solid color-mix(in srgb,var(--err) 35%,transparent);border-radius:10px;padding:12px 14px;white-space:pre-line;font-size:14px}
+.sec{background:var(--sf);border:1px solid var(--line);border-radius:12px;display:grid;grid-template-columns:260px minmax(0,1fr);min-width:0}
+.sec>header{padding:22px 24px;border-right:1px solid var(--line)}
+.sec>header h3{margin:0 0 6px;font-size:16px;font-weight:650}
+.sec>header p{margin:0;color:var(--mut);font-size:13.5px;line-height:1.45}
+.fl{padding:20px 24px 24px;min-width:0;max-width:820px}
+.o1{order:1}.o2{order:2}.o3{order:3}.o4{order:4}.o5{order:5}.o6{order:6}
+.f{margin-top:16px}.f:first-child{margin-top:0}
+label.l,.lb{display:block;font-size:13px;font-weight:550;color:var(--fg);margin:0 0 6px}
+input[type=text],input[type=password]{width:100%;height:40px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:var(--sf2);color:var(--fg);font:inherit;transition:border-color .15s,box-shadow .15s}
+input.m{font-family:var(--mono);font-size:14px}
+input[type=text]:hover,input[type=password]:hover{border-color:color-mix(in srgb,var(--mut) 45%,var(--line))}
+input:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 22%,transparent)}
+input::placeholder{color:color-mix(in srgb,var(--mut) 75%,transparent)}
+button:focus-visible,summary:focus-visible,a:focus-visible,.seg input:focus-visible+span,.opt input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+.g2>.f,.g21>.f{margin-top:0}.g2,.g21{margin-top:16px}.g2:first-child,.g21:first-child{margin-top:0}
+#ipb{margin-top:16px}
+.hint{font-size:12.5px;color:var(--mut);margin:6px 0 0;line-height:1.45}
+hr{border:0;border-top:1px solid var(--line);margin:22px 0 18px}
+.seg{display:inline-flex;padding:3px;gap:3px;border-radius:9px;background:var(--sf2);border:1px solid var(--line);max-width:100%}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.seg span{display:block;padding:6px 14px;border-radius:7px;font-size:13.5px;font-weight:550;color:var(--mut);white-space:nowrap;transition:background .15s,color .15s}
+.seg input:checked+span{background:var(--sf);color:var(--fg);box-shadow:0 1px 2px rgba(0,0,0,.12),0 0 0 1px var(--line)}
+.seg label:hover span{color:var(--fg)}
+.opts{display:grid;gap:8px}
+.opts.c2{grid-template-columns:1fr 1fr}
+.opt{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:11px 13px;cursor:pointer;background:var(--sf);transition:border-color .15s,background .15s}
+.opt:hover{border-color:color-mix(in srgb,var(--acc) 45%,var(--line))}
+.opt:has(input:checked){border-color:var(--acc);background:var(--acc2)}
+.opt input{margin:3px 0 0;accent-color:var(--acc);flex:none}
+.opt div{flex:1;min-width:0}
+.opt b{font-weight:600;font-size:14.5px}
+.opt small{display:block;color:var(--mut);font-size:12.5px;margin-top:1px}
+.opt a{font-size:12.5px;white-space:nowrap}
+details{margin-top:10px}
+summary{cursor:pointer;color:var(--mut);font-size:13.5px;width:max-content}
+summary:hover{color:var(--fg)}
+details .opts{margin-top:8px}
+.pw{display:flex;gap:8px}
+button{font:inherit;font-size:14px;font-weight:550;border-radius:8px;height:40px;padding:0 16px;cursor:pointer;border:1px solid var(--line);background:var(--sf);color:var(--fg);white-space:nowrap}
+button:hover{border-color:color-mix(in srgb,var(--mut) 50%,var(--line))}
+.pri{background:var(--acc);border-color:var(--acc);color:var(--on);min-width:150px}
+.pri:hover{filter:brightness(1.07);border-color:var(--acc)}
+.st{padding:10px 12px;border-radius:9px;background:var(--sf2);font-size:13.5px;border:1px solid var(--line);border-left:3px solid var(--mut);margin:0 0 18px;overflow-wrap:anywhere}
+.st.ok{border-left-color:var(--ok)}.st.warn{border-left-color:var(--warn)}
+#sts{margin-bottom:22px}
+.kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.kv>div{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--sf2);min-width:0}
+.kv span{display:block;font-size:12px;color:var(--mut)}
+.kv b{display:block;font:600 19px/1.35 var(--mono);font-variant-numeric:tabular-nums;margin:2px 0 1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kv small{display:block;font-size:12px;color:var(--mut);line-height:1.35}
+.band{margin-top:14px;padding:12px 14px 8px;border:1px solid var(--line);border-radius:10px;background:var(--sf2);color:var(--mut)}
+.band svg{display:block;width:100%;height:46px}
+.band .ax{display:flex;justify-content:space-between;font:11.5px var(--mono);margin-top:2px}
+.band p{margin:0 0 8px;font-size:12.5px}.band p b{color:var(--fg);font-weight:600}
+.cert{border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:10px;background:var(--sf2)}
+.ch{display:flex;justify-content:space-between;gap:8px;margin-bottom:8px;font-size:14px}
+.ch span{font-size:12px;color:var(--mut);padding:1px 8px;border-radius:999px;border:1px solid var(--line)}.ch span.y{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,transparent)}
+textarea{width:100%;min-height:80px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--sf);color:var(--fg);font:12px/1.35 var(--mono);resize:vertical}
+textarea:focus{outline:none;border-color:var(--acc)}
+.cb{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.cb input{flex:1;min-width:0;font-size:12.5px;color:var(--mut)}
+.cb button{height:34px;padding:0 12px;font-size:13px}
+.bar{order:9;position:sticky;bottom:0;z-index:4;margin:8px -24px 0;padding:14px 24px;display:flex;gap:12px;align-items:center;justify-content:flex-end;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-top:1px solid var(--line)}
+.dirty{margin-right:auto;font-size:13.5px;color:var(--mut);display:flex;align-items:center;gap:8px}
+.dirty i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.bar.chg .dirty{color:var(--fg)}.bar.chg .dirty i{background:var(--warn)}
+footer{max-width:1440px;margin:0 auto;padding:18px 24px 28px;text-align:center;color:var(--mut);font-size:12.5px}footer b{color:var(--fg);font-weight:600}footer a{color:inherit;text-decoration:none}footer a:hover b{text-decoration:underline}
+@media(max-width:1180px){.sec{grid-template-columns:1fr}.sec>header{border-right:0;border-bottom:1px solid var(--line);padding:16px 20px}.fl{padding:18px 20px 20px;max-width:none}}
+@media(max-width:900px){.wrap{grid-template-columns:1fr;gap:0;padding:0 14px}.side{position:static;padding:14px 0 0;display:flex;flex-wrap:wrap;gap:6px}.side a{white-space:nowrap;background:var(--sf);border:1px solid var(--line);padding:6px 11px;font-size:13px}.side a.on{border-color:var(--acc)}.side svg{display:none}
+main{padding-top:16px}.top{position:static}.top>div{padding:10px 14px}.chips{order:3;width:100%}.bar{margin:8px -14px 0;padding:12px 14px}.intro h2{font-size:20px}html{scroll-padding-top:12px}}
+@media(max-width:560px){.kv{grid-template-columns:1fr 1fr}.kv b{font-size:16px}.g2,.g21,.opts.c2{grid-template-columns:1fr}.dirty span{display:none}.bar button{flex:1;padding:0 10px}.pri{min-width:0}.brand{flex:1;margin:0}.brand h1{font-size:15px;white-space:normal;line-height:1.25}.chip{font-size:12px;padding:3px 9px}.side a{padding:5px 10px;font-size:12.5px}input.m{font-size:13px}.top>div{gap:10px 12px}.top nav a{padding:6px 8px}}
+</style>
+</head>
+<body>
+<div class="top"><div>
+<div class="brand"><img src="/favicon.svg" alt=""><h1>ESP32 with SX1302 Gateway</h1></div>
+<div class="chips"><span class="chip" title="Status do MQTT"><i id="cd"></i><span id="cm">MQTT…</span></span><span class="chip">IP <b class="m" id="cip">-</b></span><span class="chip">Gateway <b class="m" id="cgw">-</b></span><span class="chip">Plano <b id="cpl">-</b></span></div>
+<nav><a href="logs">Logs</a><a href="diag">Diagnósticos</a><a href="saiu" onclick="return sair()" title="Encerrar o acesso a esta página">Sair</a></nav>
+</div></div>
+
+<div class="wrap">
+<aside class="side" id="side">
+<a href="#sts"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Status</a>
+<a href="#wifi"><svg viewBox="0 0 24 24"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/></svg>Rede Wi-Fi</a>
+<a href="#lns"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg>Servidor LoRaWAN</a>
+<a href="#mqtt"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>MQTT</a>
+<a href="#radio"><svg viewBox="0 0 24 24"><path d="M12 13v8M8 21h8"/><circle cx="12" cy="10" r="2"/><path d="M7.5 5.5a6.5 6.5 0 0 0 0 9M16.5 5.5a6.5 6.5 0 0 1 0 9"/></svg>Rádio LoRa</a>
+<a href="#boot"><svg viewBox="0 0 24 24"><path d="M12 3v8"/><path d="M6.3 7.3a8 8 0 1 0 11.4 0"/></svg>Inicialização</a>
+<a href="#acc"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Acesso</a>
+</aside>
+
+<main>
+<section class="sec" id="sts"><header><h3>Status</h3><p>Funcionamento do gateway desde que ligou. Atualiza a cada 5 s enquanto esta aba estiver visível.</p></header>
+<div class="fl">
+<div id="gst" class="st">Carregando status…</div>
+<div class="kv">
+<div><span>Ligado há</span><b id="kv_up">-</b><small id="ks_up"></small></div>
+<div><span>Memória livre</span><b id="kv_mem">-</b><small id="ks_mem"></small></div>
+<div><span>Sinal Wi-Fi</span><b id="kv_rssi">-</b><small id="ks_rssi"></small></div>
+<div><span>Temperatura</span><b id="kv_tmp">-</b><small id="ks_tmp"></small></div>
+<div><span>Pacotes recebidos</span><b id="kv_rx">-</b><small id="ks_rx"></small></div>
+<div><span>Encaminhados</span><b id="kv_fwd">-</b><small id="ks_fwd"></small></div>
+<div><span>Downlinks enviados</span><b id="kv_tx">-</b><small id="ks_tx"></small></div>
+<div><span>Último ACK do servidor</span><b id="kv_udp">-</b><small id="ks_udp"></small></div>
+</div>
+</div></section>
+<div class="intro"><h2>Configuração</h2><p>Campos vazios mantêm o valor atual. Salve e reinicie para aplicar; o MQTT é aplicado ao salvar.</p></div>
+<form name='config_form' action='/resp' method='post' onsubmit='return chk(this)'>
+<div id="err" role="alert"></div>
+
+<section class="sec o5" id="boot"><header><h3>Inicialização</h3><p>Como o Wi-Fi sobe na próxima vez que o gateway ligar.</p></header>
+<div class="fl">
+<div class="opts c2">
+<label class="opt"><input type='radio' name='wifi_mode' value='station'><div><b>Modo Station</b><small>Conecta na rede Wi-Fi configurada (uso normal).</small></div></label>
+<label class="opt"><input type='radio' name='wifi_mode' value='soft_ap'><div><b>Modo Soft AP</b><small>Cria a rede “esp32” (senha esp32wifi) para configurar em 192.168.4.1.</small></div></label>
+</div>
+</div></section>
+
+<section class="sec o4" id="radio"><header><h3>Rádio LoRa</h3><p>Canais que o gateway escuta. Use o mesmo plano da região cadastrada no ChirpStack.</p></header>
+<div class="fl">
+<span class="lb">Plano de frequência</span>
+<div class="opts c2">
+<label class="opt"><input type='radio' name='freq_region' value='au915_sb0'><div><b>AU915 sub-banda 0</b><small>Canais 0–7 e 64, 915,2–916,6 MHz</small></div><a href="au915_sb0" target="_blank">JSON</a></label>
+<label class="opt"><input type='radio' name='freq_region' value='au915_sb1'><div><b>AU915 sub-banda 1</b><small>Canais 8–15 e 65, 916,8–918,2 MHz. Padrão no Brasil</small></div><a href="au915_sb1" target="_blank">JSON</a></label>
+</div>
+<details id="more"><summary>Outros planos</summary>
+<div class="opts c2">
+<label class="opt"><input type='radio' name='freq_region' value='cn470'><div><b>CN470</b><small>470–510 MHz</small></div><a href="cn470" target="_blank">JSON</a></label>
+<label class="opt"><input type='radio' name='freq_region' value='eu868'><div><b>EU868</b><small>863–870 MHz</small></div><a href="eu868" target="_blank">JSON</a></label>
+<label class="opt"><input type='radio' name='freq_region' value='us915'><div><b>US915</b><small>902–928 MHz</small></div><a href="us915" target="_blank">JSON</a></label>
+</div>
+</details>
+<div class="band" id="band"></div>
+<hr>
+<div class="g2">
+<div class="f"><label class="l" for="r0">Rádio 1, frequência central (Hz)</label><input type='text' id="r0" class="m" inputmode="numeric" name='freq_radio0'></div>
+<div class="f"><label class="l" for="r1">Rádio 2, frequência central (Hz)</label><input type='text' id="r1" class="m" inputmode="numeric" name='freq_radio1'></div>
+</div>
+<p class="hint">Ajuste avançado. Vazio usa o padrão do plano, mostrado em cinza.</p>
+</div></section>
+
+<section class="sec o1" id="wifi"><header><h3>Rede Wi-Fi</h3><p>Rede em que o gateway se conecta e como ele recebe o endereço IP.</p></header>
+<div class="fl">
+<div class="f"><label class="l" for="ssid">Nome da rede (SSID)</label><input type='text' id="ssid" autocomplete="off" name='wifi_ssid'></div>
+<div class="f"><label class="l" for="pw">Senha</label>
+<div class="pw"><input type='password' id="pw" autocomplete="new-password" name='wifi_pswd'><button type="button" onclick="tp(this)">Mostrar</button></div></div>
+<hr>
+<span class="lb">Endereço IP</span>
+<div class="seg" role="radiogroup" aria-label="Endereço IP">
+<label><input type='radio' name='ip_mode' value='dhcp' data-h="O roteador entrega IP, gateway e DNS."><span>Automático (DHCP)</span></label>
+<label><input type='radio' name='ip_mode' value='static' data-h="Endereço, gateway e DNS definidos abaixo. Use um IP fora da faixa do DHCP do roteador."><span>IP fixo</span></label>
+</div>
+<p class="hint" data-h="ip_mode"></p>
+<div id="ipb">
+<div class="g2">
+<div class="f"><label class="l" for="ia">Endereço IP</label><input type='text' id="ia" class="m" inputmode="decimal" autocomplete="off" name='ip_addr'></div>
+<div class="f"><label class="l" for="im">Máscara de rede</label><input type='text' id="im" class="m" inputmode="decimal" autocomplete="off" placeholder="255.255.255.0" name='ip_mask'></div>
+</div>
+<div class="f"><label class="l" for="ig">Gateway (roteador)</label><input type='text' id="ig" class="m" inputmode="decimal" autocomplete="off" name='ip_gw'></div>
+<div class="g2">
+<div class="f"><label class="l" for="d1">DNS primário</label><input type='text' id="d1" class="m" inputmode="decimal" autocomplete="off" name='ip_dns1'></div>
+<div class="f"><label class="l" for="d2">DNS secundário (opcional)</label><input type='text' id="d2" class="m" inputmode="decimal" autocomplete="off" placeholder="8.8.8.8" name='ip_dns2'></div>
+</div>
+<p class="hint">DNS primário vazio usa o gateway. Depois de reiniciar, abra a página no novo IP.</p>
+</div>
+</div></section>
+
+<section class="sec o2" id="lns"><header><h3>Servidor LoRaWAN</h3><p>Destino dos pacotes pelo protocolo UDP do Semtech Packet Forwarder.</p></header>
+<div class="fl">
+<p class="st warn" id="udpoff" style="display:none">UDP desligado: com o MQTT ativado, o gateway envia somente pelo MQTT. Host e porta ficam guardados para quando o MQTT for desativado.</p>
+<div class="g21">
+<div class="f"><label class="l" for="host">Host do Gateway Bridge (IP ou domínio)</label><input type='text' id="host" class="m" autocomplete="off" name='ns_host'></div>
+<div class="f"><label class="l" for="port">Porta UDP</label><input type='text' id="port" class="m" inputmode="numeric" name='ns_port'></div>
+</div>
+<div class="g2">
+<div class="f"><label class="l" for="gw">Gateway ID (EUI, 16 hexadecimais)</label><input type='text' id="gw" class="m" autocomplete="off" maxlength="16" name='gw_id'><p class="hint">Cadastre no ChirpStack exatamente o mesmo ID.</p></div>
+<div class="f"><label class="l" for="ntp">Servidor NTP</label><input type='text' id="ntp" class="m" name='ntp_server'></div>
+</div>
+</div></section>
+
+<section class="sec o3" id="mqtt"><header><h3>MQTT</h3><p>Conexão com o broker. Quando ativado, substitui o envio por UDP.</p></header>
+<div class="fl">
+<div id="mqs" class="st">Carregando status…</div>
+<span class="lb">Envio por MQTT</span>
+<div class="seg" role="radiogroup" aria-label="Envio por MQTT">
+<label><input type='radio' name='mqtt_en' value='off' data-h="Envia somente pelo UDP (Servidor LoRaWAN)."><span>Desativado</span></label>
+<label><input type='radio' name='mqtt_en' value='on' data-h="Envia somente pelo MQTT. O UDP fica desligado."><span>Ativado</span></label>
+</div>
+<p class="hint" data-h="mqtt_en"></p>
+<div class="f" style="margin-top:18px"><span class="lb">Formato</span>
+<div class="opts c2">
+<label class="opt"><input type='radio' name='mqtt_fmt' value='semtech'><div><b>Espelho Semtech</b><small>JSON do protocolo UDP em /up, /stats e /state. Só uplinks e estatísticas, sem downlinks.</small></div></label>
+<label class="opt"><input type='radio' name='mqtt_fmt' value='chirpstack'><div><b>ChirpStack v4</b><small>Protocolo do Gateway Bridge (event/up, event/stats, command/down), com downlinks.</small></div></label>
+</div></div>
+<div id="encb" class="f"><span class="lb">Codificação</span>
+<div class="seg" role="radiogroup" aria-label="Codificação">
+<label><input type='radio' name='mqtt_enc' value='json' data-h="Legível no cliente MQTT, bom para depurar."><span>JSON</span></label>
+<label><input type='radio' name='mqtt_enc' value='protobuf' data-h="Binário e menor, igual ao Gateway Bridge."><span>Protobuf</span></label>
+</div>
+<p class="hint" data-h="mqtt_enc"></p>
+</div>
+<hr>
+<div class="f"><label class="l" for="mu">Broker</label><input type='text' id="mu" class="m" autocomplete="off" placeholder="mqtts://broker.exemplo.com:8883" name='mqtt_uri'>
+<p class="hint">mqtts:// é criptografado com TLS (porta 8883). mqtt:// é sem criptografia (porta 1883).</p></div>
+<div class="g2">
+<div class="f"><label class="l" for="mus">Usuário</label><input type='text' id="mus" autocomplete="off" name='mqtt_user'></div>
+<div class="f"><label class="l" for="mpw">Senha</label><input type='password' id="mpw" autocomplete="new-password" name='mqtt_pswd'></div>
+</div>
+<div class="f"><label class="l" for="mt">Tópico base</label><input type='text' id="mt" class="m" autocomplete="off" name='mqtt_topic'>
+<p class="hint" id="mth"></p></div>
+<details id="certs"><summary>Certificados TLS</summary>
+<p class="hint">Sem CA enviada, o gateway confia nas autoridades públicas (Let's Encrypt e outras). Envie a CA se o broker usa certificado próprio. Certificado e chave do cliente só são necessários para TLS mútuo. Cada envio é aplicado na hora.</p>
+<div id="cl"></div>
+</details>
+</div></section>
+
+<section class="sec o6" id="acc"><header><h3>Acesso</h3><p>Usuário e senha pedidos ao abrir esta página.</p></header>
+<div class="fl">
+<div class="f"><label class="l" for="wu">Usuário</label><input type='text' id="wu" autocomplete="username" maxlength="31" name='web_user'></div>
+<div class="g2">
+<div class="f"><label class="l" for="wp">Nova senha</label><input type='password' id="wp" autocomplete="new-password" maxlength="31" placeholder="vazio mantém a atual" name='web_pswd'></div>
+<div class="f"><label class="l" for="wp2">Confirmar nova senha</label><input type="password" id="wp2" autocomplete="new-password" maxlength="31"></div>
+</div>
+<p class="hint">Mínimo de 6 caracteres. Depois de salvar, o navegador pede o novo login. Esqueceu? No console serial: <code>web_auth --reset</code> (volta para admin / lorawan).</p>
+</div></section>
+
+<div class="bar" id="bar">
+<div class="dirty"><i></i><span id="dt">Nenhuma alteração</span></div>
+<button type="submit" form="rb">Reiniciar gateway</button>
+<button type='submit' class="pri" name='apply'>Salvar</button>
+</div>
+</form>
+<form id="rb" action='/reboot' method='post' onsubmit='return confirm("Reiniciar o gateway agora?")'></form>
+</main>
+</div>
+<footer>ESP32 with SX1302 Gateway. Desenvolvido por <a href='https://k8s.adailsilva.com.br/' target='_blank' rel='noopener'><b>AdailSilva</b></a></footer>
+<script>
+function sair(){if(!confirm('Sair da configuração do gateway?'))return false;var x=new XMLHttpRequest();x.open('GET','logout',true,'_logout_','_logout_');x.onloadend=function(){location.replace('saiu')};x.send();return false}
+var P={au915_sb0:[915600000,916300000,915,928],au915_sb1:[917200000,917900000,915,928],us915:[904300000,905000000,902,928],eu868:[867500000,868500000,863,870],cn470:[470600000,471400000,470,510]};
+var PN={au915_sb0:"AU915 SB0",au915_sb1:"AU915 SB1",us915:"US915",eu868:"EU868",cn470:"CN470"};
+var f=document.forms.config_form;
+function $(i){return document.getElementById(i)}
+function ck(n){return f.querySelector("input[name="+n+"]:checked")}
+function reg(){var r=ck("freq_region");return r?P[r.value]:null}
+var RG={au915_sb0:"au915_0",au915_sb1:"au915_1",us915:"us915_0",eu868:"eu868",cn470:"cn470_10"};
+function band(r){var b=$("band"),sb=r=="au915_sb0"?0:r=="au915_sb1"?1:-1,i,m,on;if(sb<0){b.style.display="none";return}b.style.display="";
+var s='<svg viewBox="0 0 1000 46" preserveAspectRatio="none" aria-hidden="true">',x=function(v){return(v-915)/13*1000};
+s+='<line x1="0" y1="40" x2="1000" y2="40" stroke="currentColor" stroke-opacity=".3"/>';
+for(i=0;i<64;i++){m=915.2+.2*i;on=i>=sb*8&&i<sb*8+8;s+='<rect x="'+(x(m)-2.2).toFixed(1)+'" y="'+(on?8:26)+'" width="4.4" height="'+(on?32:14)+'" rx="1" fill="'+(on?"var(--acc)":"currentColor")+'" fill-opacity="'+(on?1:.25)+'"/>'}
+for(i=0;i<8;i++){m=915.9+1.6*i;on=i==sb;s+='<rect x="'+(x(m)-9).toFixed(1)+'" y="'+(on?4:30)+'" width="18" height="'+(on?36:10)+'" rx="2" fill="'+(on?"var(--warn)":"currentColor")+'" fill-opacity="'+(on?.9:.18)+'"/>'}
+b.innerHTML='<p>Escutando <b>8 canais de 125 kHz</b> e <b>1 de 500 kHz</b> (canal '+(64+sb)+') na faixa AU915.</p>'+s+'</svg><div class="ax"><span>915</span><span>918</span><span>921</span><span>924</span><span>928 MHz</span></div>'}
+function hints(){f.querySelectorAll("p[data-h]").forEach(function(p){var c=ck(p.getAttribute("data-h"));p.textContent=c?c.getAttribute("data-h"):""})}
+function upd(){var d=reg(),r=ck("freq_region"),g=f.gw_id.value.trim()||"<Gateway ID>",m=ck("mqtt_fmt"),cs=m&&m.value=="chirpstack";
+f.freq_radio0.placeholder=d?d[0]:"";f.freq_radio1.placeholder=d?d[1]:"";
+f.mqtt_topic.placeholder=cs?(RG[r?r.value:"au915_sb1"]||"au915_1")+"/gateway/"+g.toLowerCase():"gateway/"+g.toUpperCase();
+$("encb").style.display=cs?"":"none";
+var im=ck("ip_mode");$("ipb").style.display=im&&im.value=="static"?"":"none";
+f.ip_dns1.placeholder=f.ip_gw.value.trim()||"igual ao gateway";
+var me=ck("mqtt_en");$("udpoff").style.display=me&&me.value=="on"?"":"none";
+$("mth").innerHTML=(cs?"Publica em &lt;tópico&gt;/event/up, /event/stats, /event/ack e /state/conn, e recebe downlinks em /command/down. O prefixo (ex.: au915_1) precisa ser o da região no ChirpStack.":"Publica em &lt;tópico&gt;/up, /stats e /state.")+" Vazio usa o padrão mostrado no campo.";
+$("cgw").textContent=f.gw_id.value.trim()||"-";$("cpl").textContent=r?PN[r.value]:"-";band(r?r.value:"");hints()}
+function ip4(s){var m=/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/.exec(s);if(!m)return null;for(var i=1;i<5;i++)if(+m[i]>255)return null;return((m[1]<<24)|(m[2]<<16)|(m[3]<<8)|+m[4])>>>0}
+function tp(b){var p=$("pw");p.type=p.type=="password"?"text":"password";b.textContent=p.type=="password"?"Mostrar":"Ocultar"}
+function chk(){var e=[],d=reg(),v;
+["freq_radio0","freq_radio1"].forEach(function(n,i){v=f[n].value.trim();if(v&&(!/^\d{9}$/.test(v)||(d&&(v<d[2]*1e6||v>d[3]*1e6))))e.push("Rádio "+(i+1)+": use 9 dígitos em Hz"+(d?", entre "+d[2]+" e "+d[3]+" MHz.":"."))});
+v=f.wifi_pswd.value;if(v&&v.length<8)e.push("Senha do Wi-Fi: mínimo de 8 caracteres.");
+var ipm=ck("ip_mode");if(ipm&&ipm.value=="static"){var A={};if(!f.ip_mask.value.trim())f.ip_mask.value="255.255.255.0";
+[["ip_addr","Endereço IP",1],["ip_mask","Máscara",1],["ip_gw","Gateway",1],["ip_dns1","DNS primário",0],["ip_dns2","DNS secundário",0]].forEach(function(x){v=f[x[0]].value.trim();f[x[0]].value=v;if(!v){if(x[2])e.push(x[1]+": obrigatório com IP fixo.");return}A[x[0]]=ip4(v);if(A[x[0]]===null)e.push(x[1]+": use o formato 192.168.1.50.")});
+if(A.ip_mask!=null&&(!A.ip_mask||!/^1*0*$/.test(A.ip_mask.toString(2).padStart(32,"0"))))e.push("Máscara: inválida (ex.: 255.255.255.0).");
+else if(A.ip_addr!=null&&A.ip_gw!=null&&A.ip_mask!=null){if(((A.ip_addr&A.ip_mask)>>>0)!==((A.ip_gw&A.ip_mask)>>>0))e.push("Gateway fora da rede do endereço IP (confira a máscara).");if(A.ip_addr===A.ip_gw)e.push("Endereço IP igual ao do gateway.")}}
+v=f.ns_host.value.trim();if(v&&!/^[0-9A-Za-z.-]+$/.test(v))e.push("Host: só IP ou domínio, sem http:// e sem espaços.");
+v=f.ns_port.value.trim();if(v&&!(/^\d+$/.test(v)&&v>0&&v<65536))e.push("Porta: número entre 1 e 65535.");
+v=f.gw_id.value.trim();if(v&&!/^[0-9A-Fa-f]{16}$/.test(v))e.push("Gateway ID: exatamente 16 caracteres de 0–9 e A–F.");else f.gw_id.value=v.toUpperCase();
+v=f.mqtt_uri.value.trim();if(v&&!/^(mqtts?|wss?):\/\/[^\s\/]+/.test(v))e.push("Broker MQTT: use mqtts://host:porta (ou mqtt://).");
+if(ck("mqtt_en")&&ck("mqtt_en").value=="on"&&!v)e.push("MQTT ativado: informe o endereço do broker.");
+v=f.web_user.value.trim();if(!v||v.length>31||v.indexOf(":")>=0||v=="_logout_")e.push("Usuário da página: 1 a 31 caracteres, sem dois-pontos.");
+v=f.web_pswd.value;if(v&&(v.length<6||v.indexOf(":")>=0))e.push("Nova senha da página: mínimo de 6 caracteres, sem dois-pontos.");
+if(v!==$("wp2").value)e.push("Nova senha da página: a confirmação não confere.");
+var b=$("err");b.textContent=e.join("\n");b.style.display=e.length?"block":"none";if(e.length)scrollTo(0,0);else f._s=1;return!e.length}
+var C=[["ca","CA do broker"],["crt","Certificado do cliente"],["key","Chave privada do cliente"]];
+$("cl").innerHTML=C.map(function(c){return '<div class="cert"><div class="ch"><b>'+c[1]+'</b><span id="s_'+c[0]+'">…</span></div><textarea id="t_'+c[0]+'" placeholder="-----BEGIN ...-----"></textarea><div class="cb"><input type="file" accept=".pem,.crt,.cer,.key,.txt" onchange="ld(this,\''+c[0]+'\')"><button type="button" onclick="up(\''+c[0]+'\')">Enviar</button><button type="button" onclick="up(\''+c[0]+'\',1)">Remover</button></div></div>'}).join("");
+function ld(i,t){var r=new FileReader();r.onload=function(){$("t_"+t).value=r.result};if(i.files[0])r.readAsText(i.files[0])}
+function up(t,del){var x=$("t_"+t),b=del?"":x.value.trim();if(!del&&b.indexOf("-----BEGIN")<0){alert("Cole ou escolha um arquivo PEM (-----BEGIN ...).");return}if(del&&!confirm("Remover este certificado?"))return;
+fetch("mqtt_cert?type="+t,{method:"POST",body:b}).then(function(r){return r.json()}).then(function(j){if(j.ok){x.value=""}else alert(j.error||"Falha")}).catch(function(){alert("Sem resposta do gateway")}).then(st)}
+function ms(j){var e=$("mqs"),k=j.enabled?(j.connected?"ok":"warn"):"";
+e.className="st"+(k?" "+k:"");$("cd").className=k;$("cm").textContent=!j.enabled?"MQTT desativado":j.connected?"MQTT conectado":"MQTT desconectado";
+e.textContent=!j.enabled?"MQTT desativado.":j.connected?"Conectado a "+j.uri+(j.format=="chirpstack"?", ChirpStack v4 "+(j.encoding=="protobuf"?"Protobuf":"JSON")+", "+j.down+" downlinks ("+j.down_ok+" agendados)":"")+", "+j.sent+" mensagens enviadas, tópico "+j.topic:"Não conectado"+(j.uri?" a "+j.uri:"")+(j.error?": "+j.error:". Tentando…");
+C.forEach(function(c){var s=$("s_"+c[0]);s.textContent=j[c[0]]?"instalado":"não instalado";s.className=j[c[0]]?"y":""})}
+function nf(x){return(+x||0).toLocaleString("pt-BR")}
+function dur(s){var d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return d?d+" d "+h+" h":h?h+" h "+m+" min":m?m+" min "+s%60+" s":s+" s"}
+function kb(b){return Math.round(b/1024)+" KB"}
+function pc(a,b){return b?Math.round(100*a/b)+"%":"-"}
+function kv(i,v,t){$("kv_"+i).textContent=v;$("kv_"+i).title=v;$("ks_"+i).textContent=t}
+function gs(g){var e=$("gst"),k="ok",t;
+if(!g.run){k="warn";t="Encaminhador parado: o concentrador não iniciou ou o gateway está em modo Soft AP."}
+else if(g.udp&&(g.pull_age<0||g.pull_age>Math.max(30,g.stat))){k="warn";t=g.pull_age<0?"O servidor LoRaWAN ainda não respondeu (nenhum PULL_ACK recebido).":"O servidor LoRaWAN não responde há "+dur(g.pull_age)+"."}
+else t="Gateway funcionando"+(g.udp?", servidor LoRaWAN respondendo.":", envio por MQTT.");
+e.className="st "+k;e.textContent=t;
+kv("up",dur(g.up),"contadores zeram ao reiniciar");
+kv("mem",kb(g.heap),"mínima desde que ligou: "+kb(g.heap_min));
+kv("rssi",g.rssi==null?"-":g.rssi+" dBm",g.rssi==null?"sem conexão Station":g.rssi>=-60?"sinal bom":g.rssi>=-75?"sinal regular":"sinal fraco");
+kv("tmp",g.temp==null?"-":g.temp.toFixed(1)+" °C",g.temp==null?"aguardando a primeira leitura":"concentrador, lida a cada "+g.stat+" s");
+kv("rx",nf(g.rx),"CRC ok "+nf(g.rx_ok)+" · erro "+nf(g.rx_bad)+" · sem CRC "+nf(g.rx_nocrc));
+kv("fwd",nf(g.fwd),g.udp?"ao servidor por UDP":"ao broker por MQTT");
+kv("tx",nf(g.tx_ok),"pedidos "+nf(g.tx_req)+" · falhas "+nf(g.tx_fail)+" · rejeitados "+nf(g.tx_rej));
+if(g.udp)kv("udp",g.pull_age<0?"nenhum":"há "+dur(g.pull_age),"confirmados: PUSH "+pc(g.push_ack,g.push)+" · PULL "+pc(g.pull_ack,g.pull));
+else kv("udp","UDP desligado","o envio é só por MQTT")}
+/* one request every 5 s, the next one only after the previous answer; none while the tab is hidden */
+var T;function st(){clearTimeout(T);if(document.hidden)return;
+fetch("status",{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){ms(j.mqtt);gs(j.gw)})
+.catch(function(){$("cm").textContent="MQTT sem status";var e=$("gst");e.className="st warn";e.textContent="Sem resposta do gateway. Tentando de novo…"})
+.then(function(){clearTimeout(T);if(!document.hidden)T=setTimeout(st,5000)})}
+document.addEventListener("visibilitychange",function(){if(!document.hidden)st()});
+st();
+$("cip").textContent=location.hostname||"-";
+if(!f.ip_addr.value&&/^\d+\.\d+\.\d+\.\d+$/.test(location.hostname)&&location.hostname!="192.168.4.1"){f.ip_addr.placeholder=location.hostname;f.ip_gw.placeholder=location.hostname.replace(/\.\d+$/,".1")}
+var dirty=0;function mark(){if(dirty)return;dirty=1;$("bar").classList.add("chg");$("dt").textContent="Alterações não salvas"}
+f.addEventListener("change",function(ev){upd();if(ev.target.type!="file")mark()});f.addEventListener("input",function(ev){if(ev.target.name=="gw_id"||ev.target.name=="ip_gw")upd();if(ev.target.tagName!="TEXTAREA")mark()});
+addEventListener("beforeunload",function(ev){if(dirty&&!f._s){ev.preventDefault();ev.returnValue=""}});
+if(document.querySelector("#more input:checked"))$("more").open=true;
+upd();
+var L=[].slice.call(document.querySelectorAll("#side a"));
+function sec(a){return $(a.getAttribute("href").slice(1))}
+/* the item clicked stays marked until the user scrolls by hand: the last sections
+   can not reach the top of the screen, so the position alone would mark "Acesso" */
+var lk=null;function mk(c){L.forEach(function(a){a.classList.toggle("on",a==c)})}
+L.forEach(function(a){a.addEventListener("click",function(){lk=a;mk(a)})});
+["wheel","touchstart","keydown","mousedown"].forEach(function(n){addEventListener(n,function(){lk=null},{passive:true})});
+function spy(){if(lk)return;var cur=L[0],best=1e9;L.forEach(function(a){var t=sec(a).getBoundingClientRect().top;if(t<=220&&220-t<best){best=220-t;cur=a}});
+if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)cur=L.reduce(function(p,a){return sec(a).getBoundingClientRect().top>sec(p).getBoundingClientRect().top?a:p});
+mk(cur)}
+addEventListener("scroll",spy,{passive:true});addEventListener("resize",spy);
+lk=L.filter(function(a){return a.getAttribute("href")==location.hash})[0]||null;if(lk)mk(lk);else spy();
+</script>
+</body>
+</html>
