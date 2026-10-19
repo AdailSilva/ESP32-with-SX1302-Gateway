@@ -388,14 +388,17 @@ Os oito cartões:
 O mesmo painel no tema escuro e logo depois do primeiro boot, em Soft AP (concentrador ainda parado):
 
 <p align="center">
-  <img src="doc/images/web/web_01_status_dark.png" alt="Tela de configuração no tema escuro" width="49%"/>
-  <img src="doc/images/web/web_09_softap.png" alt="Primeiro acesso em Soft AP, com o encaminhador parado" width="49%"/>
+  <img src="doc/images/web/web_01_status_dark.png" alt="Tela de configuração no tema escuro" width="100%"/>
+</p>
+
+<p align="center">
+  <img src="doc/images/web/web_09_softap.png" alt="Primeiro acesso em Soft AP, com o encaminhador parado" width="100%"/>
 </p>
 
 #### 1.2 Rede Wi-Fi
 
 <p align="center">
-  <img src="doc/images/web/web_02_wifi.png" alt="Seção Rede Wi-Fi com IP fixo" width="85%"/>
+  <img src="doc/images/web/web_02_wifi.png" alt="Seção Rede Wi-Fi com IP fixo" width="100%"/>
 </p>
 
 | Campo | Para que serve |
@@ -411,7 +414,7 @@ Com IP fixo, a página confere se o roteador está na mesma rede do IP (pela má
 #### 1.3 Servidor LoRaWAN (UDP)
 
 <p align="center">
-  <img src="doc/images/web/web_03_lorawan_udp.png" alt="Seção Servidor LoRaWAN" width="85%"/>
+  <img src="doc/images/web/web_03_lorawan_udp.png" alt="Seção Servidor LoRaWAN" width="100%"/>
 </p>
 
 | Campo | Para que serve |
@@ -426,7 +429,7 @@ Com o MQTT ativado aparece o aviso *“UDP desligado”*: host e porta continuam
 #### 1.4 MQTT
 
 <p align="center">
-  <img src="doc/images/web/web_04_mqtt.png" alt="Seção MQTT com os certificados TLS abertos" width="85%"/>
+  <img src="doc/images/web/web_04_mqtt.png" alt="Seção MQTT com os certificados TLS abertos" width="100%"/>
 </p>
 
 A faixa do topo mostra o estado ao vivo: broker, formato, codificação, downlinks recebidos/agendados, mensagens enviadas e tópico. Em caso de falha, mostra o último erro (*“Não conectado a … : <erro>”*).
@@ -450,7 +453,7 @@ As configurações de MQTT valem assim que você clica em **Salvar**; não preci
 #### 1.5 Rádio LoRa
 
 <p align="center">
-  <img src="doc/images/web/web_05_radio.png" alt="Seção Rádio LoRa com o gráfico da sub-banda" width="85%"/>
+  <img src="doc/images/web/web_05_radio.png" alt="Seção Rádio LoRa com o gráfico da sub-banda" width="100%"/>
 </p>
 
 - **Plano de frequência:** AU915 sub-banda 0 e sub-banda 1 (padrão no Brasil) ficam à vista; CN470, EU868 e US915 ficam em **Outros planos** (abre sozinho se um deles estiver salvo). Cada opção tem o link **JSON**, que abre o arquivo do plano em uma aba nova.
@@ -460,14 +463,14 @@ As configurações de MQTT valem assim que você clica em **Salvar**; não preci
 #### 1.6 Inicialização e 1.7 Acesso
 
 <p align="center">
-  <img src="doc/images/web/web_06_boot.png" alt="Seção Inicialização" width="85%"/>
+  <img src="doc/images/web/web_06_boot.png" alt="Seção Inicialização" width="100%"/>
 </p>
 
 - **Modo Station:** conecta na rede Wi-Fi configurada (uso normal).
 - **Modo Soft AP:** na próxima vez sobe a rede `esp32` (senha `esp32wifi`) para configurar em `192.168.4.1`. O botão **BOOT** logo após o reset faz o mesmo sem mexer nesta opção.
 
 <p align="center">
-  <img src="doc/images/web/web_07_access.png" alt="Seção Acesso" width="85%"/>
+  <img src="doc/images/web/web_07_access.png" alt="Seção Acesso" width="100%"/>
 </p>
 
 - **Usuário**, **Nova senha** e **Confirmar nova senha** da própria página. Senha vazia mantém a atual. Ao salvar uma troca, o navegador pede o novo login.
@@ -502,9 +505,15 @@ O firmware também confere o login: se um usuário ou senha inválido chegar a s
 #### 1.9 Telas de confirmação
 
 <p align="center">
-  <img src="doc/images/web/web_10_saved.png" alt="Configuração salva" width="32%"/>
-  <img src="doc/images/web/web_11_reboot.png" alt="Reiniciando" width="32%"/>
-  <img src="doc/images/web/web_12_logout.png" alt="Você saiu" width="32%"/>
+  <img src="doc/images/web/web_10_saved.png" alt="Configuração salva" width="70%"/>
+</p>
+
+<p align="center">
+  <img src="doc/images/web/web_11_reboot.png" alt="Reiniciando" width="70%"/>
+</p>
+
+<p align="center">
+  <img src="doc/images/web/web_12_logout.png" alt="Você saiu" width="70%"/>
 </p>
 
 | Tela | Quando aparece | Botões |
@@ -552,8 +561,11 @@ Testes de rede feitos **a partir do gateway**, no estilo da tela *Network → Di
 - Enquanto um teste roda, as outras páginas do gateway esperam ele terminar (ping ~5 s, traceroute até ~15 s), porque o servidor HTTP atende um pedido por vez.
 
 <p align="center">
-  <img src="doc/images/web/web_15_diag_trace.png" alt="Diagnósticos: traceroute" width="49%"/>
-  <img src="doc/images/web/web_15_diag_dns.png" alt="Diagnósticos: nslookup" width="49%"/>
+  <img src="doc/images/web/web_15_diag_trace.png" alt="Diagnósticos: traceroute" width="100%"/>
+</p>
+
+<p align="center">
+  <img src="doc/images/web/web_15_diag_dns.png" alt="Diagnósticos: nslookup" width="100%"/>
 </p>
 
 ### 4. JSON do plano de frequência
@@ -561,14 +573,13 @@ Testes de rede feitos **a partir do gateway**, no estilo da tela *Network → Di
 Os links **JSON** da seção Rádio LoRa abrem o `global_conf.json` embutido de cada plano (`/au915_sb0`, `/au915_sb1`, `/us915`, `/eu868`, `/cn470`), com os comentários que explicam o mapeamento dos canais. É o modelo que o gateway usa no boot, antes de aplicar o que foi salvo na página (frequências dos rádios, servidor, Gateway ID).
 
 <p align="center">
-  <img src="doc/images/web/web_16_plan_json.png" alt="JSON do plano AU915 sub-banda 1" width="80%"/>
+  <img src="doc/images/web/web_16_plan_json.png" alt="JSON do plano AU915 sub-banda 1" width="100%"/>
 </p>
 
 ### 5. No celular
 
 <p align="center">
-  <img src="doc/images/web/web_17_mobile.png" alt="Configuração no celular" width="32%"/>
-  <img src="doc/images/web/web_18_mobile_logs_dark.png" alt="Logs no celular, tema escuro" width="32%"/>
+  <img src="doc/images/web/web_17_mobile.png" alt="No celular: configuração (tema claro) e logs (tema escuro)" width="100%"/>
 </p>
 
 ### Endereços HTTP
