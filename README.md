@@ -3,12 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/AdailSilva/ESP32-with-SX1302-Gateway/actions/workflows/build.yml"><img src="https://github.com/AdailSilva/ESP32-with-SX1302-Gateway/actions/workflows/build.yml/badge.svg" alt="build"/></a>
-  <img src="https://img.shields.io/badge/versão-0.0.1-0e7490" alt="versão 0.0.1"/>
-  <img src="https://img.shields.io/badge/ESP--IDF-v5.5%20%7C%20v6.x-e7352c?logo=espressif&logoColor=white" alt="ESP-IDF"/>
-  <img src="https://img.shields.io/badge/SX1302__HAL-v2.1.0-7c3aed" alt="SX1302_HAL v2.1.0"/>
-  <img src="https://img.shields.io/badge/LoRaWAN-AU915%20%C2%B7%20US915%20%C2%B7%20EU868%20%C2%B7%20CN470-16a34a" alt="planos de frequência"/>
-  <img src="https://img.shields.io/badge/licença-BSD--3--Clause-475569" alt="licença BSD-3-Clause"/>
+  <a href="https://github.com/AdailSilva/ESP32-with-SX1302-Gateway/actions/workflows/build.yml"><img src="doc/images/badges.svg" alt="build · versão 0.0.1 · ESP-IDF v5.5 | v6.x · SX1302_HAL v2.1.0 · LoRaWAN AU915 · US915 · EU868 · CN470 · licença BSD-3-Clause" width="100%"/></a>
 </p>
 
 **ESP32_SX1302** é um gateway LoRaWAN de **8 canais** e baixo custo. Ele usa um **ESP32** no lugar do Raspberry Pi e um concentrador **Semtech SX1302**, com o porte do [SX1302_HAL v2.1.0](https://github.com/Lora-net/sx1302_hal). O firmware conversa com o **ChirpStack** (ou qualquer servidor compatível) por **UDP Semtech** ou por **MQTT/MQTTS** no protocolo de gateway do ChirpStack v4. A configuração é feita por uma página web em português ou pelo console serial.

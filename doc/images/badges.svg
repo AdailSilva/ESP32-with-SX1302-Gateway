@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="897" height="20" viewBox="0 0 897 20" role="img" aria-label="build GitHub Actions · versão 0.0.1 · ESP-IDF v5.5 | v6.x · SX1302_HAL v2.1.0 · LoRaWAN AU915 · US915 · EU868 · CN470 · licença BSD-3-Clause">
+<title>build GitHub Actions · versão 0.0.1 · ESP-IDF v5.5 | v6.x · SX1302_HAL v2.1.0 · LoRaWAN AU915 · US915 · EU868 · CN470 · licença BSD-3-Clause</title>
+<linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient>
+<g transform="translate(0)">
+<clipPath id="r0"><rect width="133" height="20" rx="3"/></clipPath>
+<g clip-path="url(#r0)"><rect width="39" height="20" fill="#555"/><rect x="39" width="94" height="20" fill="#2563eb"/><rect width="133" height="20" fill="url(#s)"/></g>
+<g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11">
+<text x="19.5" y="15" fill="#010101" fill-opacity=".3" textLength="27" lengthAdjust="spacingAndGlyphs">build</text>
+<text x="19.5" y="14" textLength="27" lengthAdjust="spacingAndGlyphs">build</text>
+<text x="86.0" y="15" fill="#010101" fill-opacity=".3" textLength="82" lengthAdjust="spacingAndGlyphs">GitHub Actions</text>
+<text x="86.0" y="14" textLength="82" lengthAdjust="spacingAndGlyphs">GitHub Actions</text>
+</g></g>
+<g transform="translate(139)">
+<clipPath id="r1"><rect width="89" height="20" rx="3"/></clipPath>
+<g clip-path="url(#r1)"><rect width="49" height="20" fill="#555"/><rect x="49" width="40" height="20" fill="#0e7490"/><rect width="89" height="20" fill="url(#s)"/></g>
+<g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11">
+<text x="24.5" y="15" fill="#010101" fill-opacity=".3" textLength="37" lengthAdjust="spacingAndGlyphs">versão</text>
+<text x="24.5" y="14" textLength="37" lengthAdjust="spacingAndGlyphs">versão</text>
+<text x="69.0" y="15" fill="#010101" fill-opacity=".3" textLength="28" lengthAdjust="spacingAndGlyphs">0.0.1</text>
+<text x="69.0" y="14" textLength="28" lengthAdjust="spacingAndGlyphs">0.0.1</text>
+</g></g>
+<g transform="translate(234)">
+<clipPath id="r2"><rect width="124" height="20" rx="3"/></clipPath>
+<g clip-path="url(#r2)"><rect width="54" height="20" fill="#555"/><rect x="54" width="70" height="20" fill="#e7352c"/><rect width="124" height="20" fill="url(#s)"/></g>
+<g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11">
+<text x="27.0" y="15" fill="#010101" fill-opacity=".3" textLength="42" lengthAdjust="spacingAndGlyphs">ESP-IDF</text>
+<text x="27.0" y="14" textLength="42" lengthAdjust="spacingAndGlyphs">ESP-IDF</text>
+<text x="89.0" y="15" fill="#010101" fill-opacity=".3" textLength="58" lengthAdjust="spacingAndGlyphs">v5.5 | v6.x</text>
+<text x="89.0" y="14" textLength="58" lengthAdjust="spacingAndGlyphs">v5.5 | v6.x</text>
+</g></g>
+<g transform="translate(364)">
+<clipPath id="r3"><rect width="129" height="20" rx="3"/></clipPath>
+<g clip-path="url(#r3)"><rect width="82" height="20" fill="#555"/><rect x="82" width="47" height="20" fill="#7c3aed"/><rect width="129" height="20" fill="url(#s)"/></g>
+<g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11">
+<text x="41.0" y="15" fill="#010101" fill-opacity=".3" textLength="70" lengthAdjust="spacingAndGlyphs">SX1302_HAL</text>
+<text x="41.0" y="14" textLength="70" lengthAdjust="spacingAndGlyphs">SX1302_HAL</text>
+<text x="105.5" y="15" fill="#010101" fill-opacity=".3" textLength="35" lengthAdjust="spacingAndGlyphs">v2.1.0</text>
+<text x="105.5" y="14" textLength="35" lengthAdjust="spacingAndGlyphs">v2.1.0</text>
+</g></g>
+<g transform="translate(499)">
+<clipPath id="r4"><rect width="254" height="20" rx="3"/></clipPath>
+<g clip-path="url(#r4)"><rect width="65" height="20" fill="#555"/><rect x="65" width="189" height="20" fill="#16a34a"/><rect width="254" height="20" fill="url(#s)"/></g>
+<g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11">
+<text x="32.5" y="15" fill="#010101" fill-opacity=".3" textLength="53" lengthAdjust="spacingAndGlyphs">LoRaWAN</text>
+<text x="32.5" y="14" textLength="53" lengthAdjust="spacingAndGlyphs">LoRaWAN</text>
+<text x="159.5" y="15" fill="#010101" fill-opacity=".3" textLength="177" lengthAdjust="spacingAndGlyphs">AU915 · US915 · EU868 · CN470</text>
+<text x="159.5" y="14" textLength="177" lengthAdjust="spacingAndGlyphs">AU915 · US915 · EU868 · CN470</text>
+</g></g>
+<g transform="translate(759)">
+<clipPath id="r5"><rect width="138" height="20" rx="3"/></clipPath>
+<g clip-path="url(#r5)"><rect width="51" height="20" fill="#555"/><rect x="51" width="87" height="20" fill="#475569"/><rect width="138" height="20" fill="url(#s)"/></g>
+<g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11">
+<text x="25.5" y="15" fill="#010101" fill-opacity=".3" textLength="39" lengthAdjust="spacingAndGlyphs">licença</text>
+<text x="25.5" y="14" textLength="39" lengthAdjust="spacingAndGlyphs">licença</text>
+<text x="94.5" y="15" fill="#010101" fill-opacity=".3" textLength="75" lengthAdjust="spacingAndGlyphs">BSD-3-Clause</text>
+<text x="94.5" y="14" textLength="75" lengthAdjust="spacingAndGlyphs">BSD-3-Clause</text>
+</g></g>
+</svg>
