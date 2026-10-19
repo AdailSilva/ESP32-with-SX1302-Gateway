@@ -72,6 +72,10 @@ idf_component_register(SRCS
     INCLUDE_DIRS "packet_forwarder"
 )
 
+# Firmware version from the Git tag (see the top-level CMakeLists.txt)
+idf_build_get_property(fw_version PROJECT_VER)
+target_compile_definitions(${COMPONENT_LIB} PRIVATE "ESP32_SX1302_VERSION=\"${fw_version}\"")
+
 # ---------------------------------------------------------------------------
 # Board pin map per target (each value can still be overridden with -D...)
 # ---------------------------------------------------------------------------

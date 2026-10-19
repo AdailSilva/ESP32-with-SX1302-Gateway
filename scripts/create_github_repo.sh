@@ -18,7 +18,7 @@ gh auth status >/dev/null 2>&1 || { echo "run 'gh auth login' first"; exit 1; }
 [ -d .git ] && { echo "this folder is already a git repository (.git exists)"; exit 1; }
 
 GH_USER=$(gh api user -q .login)
-VER=$(sed -n 's/.*ESP32_SX1302_VERSION "\(.*\)".*/\1/p' main/packet_forwarder/loragw_version.h)
+VER="0.0.1"   # first tag; the firmware version comes from the Git tag
 echo "user: $GH_USER  repo: $REPO  version: v$VER"
 
 # README: placeholder -> your GitHub user

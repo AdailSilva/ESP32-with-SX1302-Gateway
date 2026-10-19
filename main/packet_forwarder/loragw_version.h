@@ -15,6 +15,10 @@ License: Revised BSD License, see LICENSE.TXT file include in the project
 #ifndef __LORAGW_VERSION__
 #define __LORAGW_VERSION__
 
-#define ESP32_SX1302_VERSION "0.0.1"
+/* Normally defined by the build from the Git tag (top-level CMakeLists.txt).
+ * This fallback is only used when the file is compiled outside that build. */
+#ifndef ESP32_SX1302_VERSION
+#define ESP32_SX1302_VERSION "0.0.0-dev"
+#endif
 
 #endif

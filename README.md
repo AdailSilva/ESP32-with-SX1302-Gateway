@@ -34,6 +34,7 @@ O mesmo código-fonte gera firmware para **duas placas**:
 - [Alimentação](#-alimentação)
 - [Compilar e gravar](#-compilar-e-gravar)
 - [Primeiro uso](#-primeiro-uso)
+- [Servidor web embutido](#-servidor-web-embutido)
 - [Configuração](#-configuração)
 - [Roadmap (ESP32-S3)](#-roadmap-esp32-s3)
 - [Estrutura do repositório](#-estrutura-do-repositório)
@@ -311,18 +312,299 @@ I (...) gw_mqtt: connected to the broker          ← quando o MQTT está ligado
 
 ---
 
+## 🖥️ Servidor web embutido
+
+O gateway traz um servidor HTTP próprio (`esp_http_server`, porta **80**) com quatro telas: **Configuração** (com o painel de status), **Logs**, **Diagnósticos** e o **JSON dos planos de frequência**, além das páginas curtas de confirmação. Tudo fica gravado na flash do firmware, não depende de internet nem de CDN e funciona igual no ESP32 e no ESP32-S3.
+
+- **Endereço:** `http://192.168.4.1` em Soft AP, ou o IP que o roteador entregou (ou o IP fixo configurado) em Station. É *http*, não *https*.
+- **Tema:** claro ou escuro, conforme o tema do sistema operacional/navegador (`prefers-color-scheme`). `/w` é um apelido de `/` mantido por compatibilidade.
+- **Celular:** todas as telas se adaptam a telas estreitas (menu vira uma lista de botões, cartões em 2 colunas, campos em 1 coluna).
+- **Código:** `main/packet_forwarder/webpage.html` (configuração), `logs_page.h`, `diag_page.h` e as páginas curtas em `http_server.c`. Depois de editar o `webpage.html`, rode `scripts/gen_headers.sh` (o `build.sh` já faz isso).
+
+> As capturas abaixo foram geradas a partir do HTML/JS real do firmware, servido com **dados de exemplo** (Gateway ID `E45F01FFFE10E12E`, broker `mqtt.exemplo.com.br`, servidor `chirpstack.exemplo.com.br`). Os números não são de um gateway em campo.
+
+### 🔐 Login e sessão
+
+Todas as páginas e chamadas usam **HTTP Basic Auth**. O navegador abre a janela de usuário e senha dele mesmo na primeira visita.
+
+| Item | Detalhe |
+|---|---|
+| Login padrão | `admin` / `lorawan` |
+| Trocar | Seção **Acesso** da página ou `web_auth --user <u> --pass <p>` no console. Vale **na hora**, sem reiniciar |
+| Esqueceu a senha | `web_auth --reset` no console serial (volta para `admin` / `lorawan`) |
+| Regras | Usuário de 1 a 31 caracteres; senha de 6 a 31; nenhum dos dois pode ter `:`; o usuário `_logout_` é reservado |
+| Sair | Link **Sair** no topo de qualquer tela. Pede confirmação, troca o login guardado pelo navegador por um login falso (`_logout_`) e abre a tela **Você saiu**. O próximo acesso pede usuário e senha de novo |
+| Sem login | Só `/favicon.svg`, `/favicon.ico` e `/saiu` |
+
+As senhas (Wi-Fi, MQTT e da página) **nunca** voltam para o navegador: os campos aparecem vazios com a dica *“Salva (vazio mantém)”*, e no log o formulário enviado aparece com `wifi_pswd=***`, `mqtt_pswd=***` e `web_pswd=***`.
+
+### 1. Configuração (`/`)
+
+É a tela principal. Tem a **barra superior**, o **menu lateral**, o **painel de status** e as seis seções de configuração, com uma **barra de ações** fixa no rodapé.
+
+<p align="center">
+  <img src="doc/images/web/web_01_status.png" alt="Tela de configuração: barra superior, menu lateral e painel de status" width="100%"/>
+</p>
+
+**Barra superior** (fica fixa no topo ao rolar):
+
+| Elemento | O que mostra |
+|---|---|
+| Ponto + texto MQTT | 🟢 *MQTT conectado* · 🟠 *MQTT desconectado* · ⚪ *MQTT desativado* (vem do `/status`) |
+| IP | Endereço usado para abrir a página |
+| Gateway | Gateway ID. Muda enquanto você digita no campo |
+| Plano | Plano de frequência marcado (AU915 SB0/SB1, US915, EU868, CN470). Muda ao clicar em outro |
+| Logs · Diagnósticos · Sair | Atalhos para as outras telas e para encerrar a sessão |
+
+**Menu lateral:** Status, Rede Wi-Fi, Servidor LoRaWAN, MQTT, Rádio LoRa, Inicialização e Acesso. Clicar rola até a seção; ao rolar a página, o item da seção visível fica marcado.
+
+#### 1.1 Painel de status
+
+Lê `GET /status` a cada **5 s**, só enquanto a aba está visível. Um pedido novo só sai depois da resposta do anterior, para não sobrecarregar o ESP32.
+
+A faixa no topo resume a situação:
+
+| Faixa | Quando aparece |
+|---|---|
+| 🟢 *Gateway funcionando, servidor LoRaWAN respondendo.* | Forwarder rodando por UDP e o último `PULL_ACK` é recente |
+| 🟢 *Gateway funcionando, envio por MQTT.* | Forwarder rodando com MQTT ativado |
+| 🟠 *Encaminhador parado…* | O concentrador não iniciou (veja a fiação) ou o gateway está em Soft AP |
+| 🟠 *O servidor LoRaWAN ainda não respondeu…* / *não responde há …* | Nenhum `PULL_ACK` recebido, ou o último é mais velho que o intervalo de estatística (mín. 30 s) |
+| 🟠 *Sem resposta do gateway. Tentando de novo…* | O navegador perdeu contato com o gateway |
+
+Os oito cartões:
+
+| Cartão | Valor | Linha de baixo |
+|---|---|---|
+| Ligado há | Uptime (`2 d 5 h`, `14 min 3 s`…) | Lembra que os contadores zeram ao reiniciar |
+| Memória livre | Heap interno livre | Mínimo já atingido desde que ligou |
+| Sinal Wi-Fi | RSSI do AP em dBm | *sinal bom* (≥ −60), *regular* (≥ −75), *fraco*; ou *sem conexão Station* |
+| Temperatura | Leitura do STTS751 do HAT | Intervalo de leitura, ou *aguardando a primeira leitura* |
+| Pacotes recebidos | Total de pacotes de RF | CRC ok · erro · sem CRC |
+| Encaminhados | Pacotes enviados ao servidor | *ao servidor por UDP* ou *ao broker por MQTT* |
+| Downlinks enviados | TX feitos pelo concentrador | Pedidos · falhas · rejeitados (colisão, cedo/tarde demais) |
+| Último ACK do servidor | Idade do último `PULL_ACK` (UDP) | % de `PUSH_DATA` e `PULL_DATA` confirmados. Com MQTT: *UDP desligado* |
+
+O mesmo painel no tema escuro e logo depois do primeiro boot, em Soft AP (concentrador ainda parado):
+
+<p align="center">
+  <img src="doc/images/web/web_01_status_dark.png" alt="Tela de configuração no tema escuro" width="49%"/>
+  <img src="doc/images/web/web_09_softap.png" alt="Primeiro acesso em Soft AP, com o encaminhador parado" width="49%"/>
+</p>
+
+#### 1.2 Rede Wi-Fi
+
+<p align="center">
+  <img src="doc/images/web/web_02_wifi.png" alt="Seção Rede Wi-Fi com IP fixo" width="85%"/>
+</p>
+
+| Campo | Para que serve |
+|---|---|
+| Nome da rede (SSID) | Rede em que o gateway entra no modo Station. Só caracteres ASCII |
+| Senha | Mínimo de 8 caracteres. **Mostrar/Ocultar** exibe o que foi digitado. Vazio mantém a senha salva |
+| Endereço IP | **Automático (DHCP)** ou **IP fixo** |
+| Endereço IP, Máscara, Gateway (roteador) | Obrigatórios com IP fixo. A máscara vazia vira `255.255.255.0`. A página sugere o IP atual e o roteador `x.x.x.1` |
+| DNS primário / secundário | Primário vazio usa o roteador; secundário é opcional (sugestão `8.8.8.8`) |
+
+Com IP fixo, a página confere se o roteador está na mesma rede do IP (pela máscara) e se não é o próprio IP. Depois de reiniciar, abra a página no IP novo.
+
+#### 1.3 Servidor LoRaWAN (UDP)
+
+<p align="center">
+  <img src="doc/images/web/web_03_lorawan_udp.png" alt="Seção Servidor LoRaWAN" width="85%"/>
+</p>
+
+| Campo | Para que serve |
+|---|---|
+| Host do Gateway Bridge | IP ou domínio do ChirpStack Gateway Bridge (sem `http://`) |
+| Porta UDP | Normalmente `1700` |
+| Gateway ID | EUI de 16 hexadecimais. É convertido para maiúsculas ao salvar. Cadastre o mesmo ID no ChirpStack |
+| Servidor NTP | Padrão `br.pool.ntp.org` |
+
+Com o MQTT ativado aparece o aviso *“UDP desligado”*: host e porta continuam guardados para quando o MQTT for desligado. O Gateway ID e o NTP valem nos dois modos.
+
+#### 1.4 MQTT
+
+<p align="center">
+  <img src="doc/images/web/web_04_mqtt.png" alt="Seção MQTT com os certificados TLS abertos" width="85%"/>
+</p>
+
+A faixa do topo mostra o estado ao vivo: broker, formato, codificação, downlinks recebidos/agendados, mensagens enviadas e tópico. Em caso de falha, mostra o último erro (*“Não conectado a … : <erro>”*).
+
+| Campo | Opções |
+|---|---|
+| Envio por MQTT | **Desativado** (só UDP) · **Ativado** (só MQTT; o UDP desliga) |
+| Formato | **Espelho Semtech** (JSON do UDP em `/up`, `/stats`, `/state`, sem downlinks) · **ChirpStack v4** (`event/up`, `event/stats`, `event/ack`, `state/conn`, `command/down`, com downlinks) |
+| Codificação | **JSON** ou **Protobuf**. Só aparece no formato ChirpStack v4 |
+| Broker | `mqtts://host:8883` (TLS) ou `mqtt://host:1883`. `ws://`/`wss://` também são aceitos. Obrigatório com o MQTT ativado |
+| Usuário / Senha | Credenciais do broker. Senha vazia mantém a salva |
+| Tópico base | Vazio usa o padrão mostrado em cinza, calculado na hora: `au915_1/gateway/<id em minúsculas>` (ChirpStack, prefixo da região escolhida) ou `gateway/<ID>` (Semtech) |
+
+**Certificados TLS** (clique para abrir): três caixas, **CA do broker**, **Certificado do cliente** e **Chave privada do cliente**, cada uma com o selo *instalado / não instalado*. Cole o PEM ou escolha um arquivo (`.pem`, `.crt`, `.cer`, `.key`, `.txt`) e clique em **Enviar**; **Remover** apaga (pede confirmação). Cada envio vai por `POST /mqtt_cert?type=ca|crt|key`, fica na NVS (até 8 KB cada) e reconecta o MQTT **na hora**, sem precisar de *Salvar*.
+
+- Sem CA enviada, o broker é validado pelo bundle público do ESP-IDF (Let's Encrypt e outros).
+- Certificado e chave do cliente só são usados juntos (TLS mútuo).
+
+As configurações de MQTT valem assim que você clica em **Salvar**; não precisa reiniciar.
+
+#### 1.5 Rádio LoRa
+
+<p align="center">
+  <img src="doc/images/web/web_05_radio.png" alt="Seção Rádio LoRa com o gráfico da sub-banda" width="85%"/>
+</p>
+
+- **Plano de frequência:** AU915 sub-banda 0 e sub-banda 1 (padrão no Brasil) ficam à vista; CN470, EU868 e US915 ficam em **Outros planos** (abre sozinho se um deles estiver salvo). Cada opção tem o link **JSON**, que abre o arquivo do plano em uma aba nova.
+- **Gráfico da faixa AU915:** mostra os 64 canais de 125 kHz e os 8 de 500 kHz entre 915 e 928 MHz, com os 8 + 1 canais escutados em destaque. Só aparece nos planos AU915.
+- **Rádio 1 / Rádio 2, frequência central (Hz):** ajuste avançado. Vazio usa o padrão do plano, que aparece em cinza. Precisa ter 9 dígitos e ficar dentro da faixa do plano (ex.: 915–928 MHz no AU915).
+
+#### 1.6 Inicialização e 1.7 Acesso
+
+<p align="center">
+  <img src="doc/images/web/web_06_boot.png" alt="Seção Inicialização" width="85%"/>
+</p>
+
+- **Modo Station:** conecta na rede Wi-Fi configurada (uso normal).
+- **Modo Soft AP:** na próxima vez sobe a rede `esp32` (senha `esp32wifi`) para configurar em `192.168.4.1`. O botão **BOOT** logo após o reset faz o mesmo sem mexer nesta opção.
+
+<p align="center">
+  <img src="doc/images/web/web_07_access.png" alt="Seção Acesso" width="85%"/>
+</p>
+
+- **Usuário**, **Nova senha** e **Confirmar nova senha** da própria página. Senha vazia mantém a atual. Ao salvar uma troca, o navegador pede o novo login.
+
+#### 1.8 Salvar, reiniciar e validação
+
+A barra do rodapé mostra *“Nenhuma alteração”* ou, com um ponto laranja, *“Alterações não salvas”*. Se você tentar sair da página com alterações pendentes, o navegador avisa.
+
+- **Salvar** (`POST /resp`): valida os campos, grava na NVS e aplica na hora o **MQTT** e o **login**. O resto (Wi-Fi, IP, servidor UDP, plano, rádios, NTP, modo de boot) vale depois de reiniciar. **Campos vazios mantêm o valor atual.**
+- **Reiniciar gateway** (`POST /reboot`): pede confirmação e reinicia.
+
+Antes de enviar, a página confere os campos e lista todos os problemas de uma vez no topo do formulário:
+
+<p align="center">
+  <img src="doc/images/web/web_08_validation.png" alt="Erros de validação listados no topo do formulário" width="100%"/>
+</p>
+
+| Campo | Regra |
+|---|---|
+| Rádio 1 / 2 | 9 dígitos em Hz, dentro da faixa do plano |
+| Senha do Wi-Fi | Mínimo de 8 caracteres |
+| IP fixo | IP, máscara e gateway obrigatórios, no formato `192.168.1.50`; máscara válida; gateway na mesma rede e diferente do IP |
+| Host | Só IP ou domínio, sem `http://` e sem espaços |
+| Porta | 1 a 65535 |
+| Gateway ID | Exatamente 16 caracteres de `0–9` e `A–F` |
+| Broker MQTT | `mqtt://`, `mqtts://`, `ws://` ou `wss://`; obrigatório com MQTT ativado |
+| Usuário da página | 1 a 31 caracteres, sem `:` |
+| Nova senha da página | Mínimo de 6 caracteres, sem `:`, igual à confirmação |
+
+O firmware também confere o login: se um usuário ou senha inválido chegar a ser gravado (vazio, longo demais, com `:` ou o usuário `_logout_`), ele volta a usar o padrão `admin` / `lorawan`.
+
+#### 1.9 Telas de confirmação
+
+<p align="center">
+  <img src="doc/images/web/web_10_saved.png" alt="Configuração salva" width="32%"/>
+  <img src="doc/images/web/web_11_reboot.png" alt="Reiniciando" width="32%"/>
+  <img src="doc/images/web/web_12_logout.png" alt="Você saiu" width="32%"/>
+</p>
+
+| Tela | Quando aparece | Botões |
+|---|---|---|
+| **Configuração salva** | Depois de *Salvar*. Se o login mudou, avisa que o navegador vai pedir o novo | **Reiniciar agora** · **Voltar** |
+| **Reiniciando…** | Depois de reiniciar. Volta sozinha para `/` em 15 s. Se o modo mudou (Soft AP ↔ Station), abra pelo novo endereço | — |
+| **Você saiu** | Depois de *Sair* | **Entrar novamente**. Se o navegador entrar sem pedir senha, feche todas as janelas dele |
+
+### 2. Logs (`/logs`)
+
+Mostra a mesma saída do console serial, ao vivo, sem precisar de cabo USB.
+
+<p align="center">
+  <img src="doc/images/web/web_13_logs.png" alt="Tela de logs ao vivo" width="100%"/>
+</p>
+
+- **Atualização:** a cada 1,5 s (`GET /logs_data?from=<posição>`), só com a aba visível. Quando há muito texto acumulado, busca de novo logo em seguida.
+- **Memória:** o gateway guarda os últimos **16 KB** em RAM (`WEBLOG_SIZE` em `weblog.h`); a página guarda até **3000 linhas**. Se algo foi descartado entre duas leituras, aparece *“[… N bytes antigos descartados …]”*.
+- **Cores:** 🔴 erros (`ERROR`, `E (`, `failed`) · 🟡 avisos (`WARN`, `W (`) · 🟢 pacotes recebidos (`rxpk`, `JSON up`).
+- **Pausar / Continuar** para de buscar texto novo. **Limpar tela** limpa só a tela (o gateway continua guardando).
+- **Filtrar:** mostra só as linhas que contêm o texto (sem diferenciar maiúsculas), por exemplo `rxpk`, `ERROR`, `mqtt`.
+- **Rolar automático:** mantém a última linha visível.
+- **Baixar do gateway** (`/logs_download`): arquivo `esp32_sx1302_<GatewayID>_<AAAAMMDD-HHMMSS>.log` com tudo o que está na RAM do gateway, sem os códigos de cor ANSI. Sem hora do NTP, o nome usa o uptime.
+- **Baixar sessão:** gera no navegador `esp32_sx1302_sessao_<data-hora>.log` com tudo o que a página recebeu desde que foi aberta.
+
+<p align="center">
+  <img src="doc/images/web/web_14_logs_filter.png" alt="Logs filtrados por JSON up" width="100%"/>
+</p>
+
+> Mensagens anteriores ao início do log web (bootloader, `cpu_start`) só aparecem na porta serial.
+
+### 3. Diagnósticos (`/diag`)
+
+Testes de rede feitos **a partir do gateway**, no estilo da tela *Network → Diagnostics* do OpenWrt. Ajudam a separar problema de Wi-Fi, de DNS e de servidor.
+
+<p align="center">
+  <img src="doc/images/web/web_15_diag_ping.png" alt="Diagnósticos: ping" width="100%"/>
+</p>
+
+- **Destino:** já vem com o host do servidor LoRaWAN. A lista de sugestões traz o servidor LoRaWAN, o host do broker MQTT, o roteador Wi-Fi, `8.8.8.8` e `openwrt.org`. Aceita IP ou nome de até 63 caracteres.
+- **Ping:** 5 pacotes ICMP, 1 por segundo, com resumo de perda e min/média/máx. **Enter** no campo também roda o ping.
+- **Traceroute:** até 15 saltos, 1 tentativa de 1 s por salto (`*` = sem resposta).
+- **Nslookup:** resolve o nome pelo DNS que o gateway usa e mostra o servidor DNS e os endereços.
+- O resultado chega linha a linha (`GET /diag_run?t=ping|trace|dns&h=<destino>`). **Parar** interrompe; o rodapé mostra o tempo gasto.
+- Enquanto um teste roda, as outras páginas do gateway esperam ele terminar (ping ~5 s, traceroute até ~15 s), porque o servidor HTTP atende um pedido por vez.
+
+<p align="center">
+  <img src="doc/images/web/web_15_diag_trace.png" alt="Diagnósticos: traceroute" width="49%"/>
+  <img src="doc/images/web/web_15_diag_dns.png" alt="Diagnósticos: nslookup" width="49%"/>
+</p>
+
+### 4. JSON do plano de frequência
+
+Os links **JSON** da seção Rádio LoRa abrem o `global_conf.json` embutido de cada plano (`/au915_sb0`, `/au915_sb1`, `/us915`, `/eu868`, `/cn470`), com os comentários que explicam o mapeamento dos canais. É o modelo que o gateway usa no boot, antes de aplicar o que foi salvo na página (frequências dos rádios, servidor, Gateway ID).
+
+<p align="center">
+  <img src="doc/images/web/web_16_plan_json.png" alt="JSON do plano AU915 sub-banda 1" width="80%"/>
+</p>
+
+### 5. No celular
+
+<p align="center">
+  <img src="doc/images/web/web_17_mobile.png" alt="Configuração no celular" width="32%"/>
+  <img src="doc/images/web/web_18_mobile_logs_dark.png" alt="Logs no celular, tema escuro" width="32%"/>
+</p>
+
+### Endereços HTTP
+
+| Método | Caminho | Login | Resposta |
+|---|---|:---:|---|
+| GET | `/` (e `/w`) | ✅ | Página de configuração com os valores salvos |
+| POST | `/resp` | ✅ | Recebe o formulário, grava na NVS, aplica MQTT e login, devolve *Configuração salva* |
+| POST | `/reboot` | ✅ | Página *Reiniciando…* e reinício do ESP32 |
+| GET | `/status` | ✅ | `{"gw":{...},"mqtt":{...}}`: uptime, heap, RSSI, temperatura, contadores de RX/TX/UDP e estado do MQTT |
+| POST | `/mqtt_cert?type=ca\|crt\|key` | ✅ | Corpo = PEM (vazio remove). `{"ok":true}` ou `{"ok":false,"error":"..."}`; acima de 8 KB, `413` |
+| GET | `/logs` | ✅ | Página de logs |
+| GET | `/logs_data?from=<n>` | ✅ | Texto novo desde a posição `n`; cabeçalhos `X-Log-Start` e `X-Log-Next` |
+| GET | `/logs_download` | ✅ | Arquivo `.log` com todo o buffer em RAM |
+| GET | `/diag` | ✅ | Página de diagnósticos |
+| GET | `/diag_run?t=ping\|trace\|dns&h=<host>` | ✅ | Resultado em texto, enviado linha a linha; `400` se o teste ou o destino for inválido |
+| GET | `/au915_sb0`, `/au915_sb1`, `/us915`, `/eu868`, `/cn470` | ✅ | JSON do plano dentro de `<pre>` |
+| GET | `/logout` | — | Só aceita o login falso `_logout_`; usado pelo link *Sair* |
+| GET | `/saiu` | — | Página *Você saiu* |
+| GET | `/favicon.svg`, `/favicon.ico` | — | Ícone do gateway |
+
+Exemplo com `curl` na rede local:
+
+```bash
+curl -s -u admin:lorawan http://192.168.1.50/status | jq .gw.rx
+curl -s -u admin:lorawan -o gw.log http://192.168.1.50/logs_download
+curl -s -u admin:lorawan "http://192.168.1.50/diag_run?t=ping&h=8.8.8.8"
+```
+
+---
+
 ## ⚙️ Configuração
 
 ### Páginas web
 
-| Caminho | Conteúdo |
-|---|---|
-| `/` | Configuração completa e painel de status |
-| `/status` | Status em JSON (`{"gw":{...},"mqtt":{...}}`), atualizado a cada 5 s pela página |
-| `/logs` | Log ao vivo, com filtro e pausa. `/logs_download` baixa o buffer inteiro |
-| `/diag` | Ping, traceroute e nslookup a partir do gateway |
-| `/au915_sb0`, `/au915_sb1`, `/us915`, `/eu868`, `/cn470` | JSON do plano de frequência |
-| `/logout` | Encerra a sessão da página |
+As telas, os campos e todos os endereços HTTP estão em [Servidor web embutido](#-servidor-web-embutido).
 
 ### Console serial (`ESP32_SX1302>`)
 
@@ -388,6 +670,7 @@ esp32_sx1302/
 │       └── global_conf.json/     # planos AU915 SB0/SB1, US915, EU868, CN470
 ├── doc/
 │   ├── images/                   # diagramas SVG deste README
+│   │   └── web/                  # capturas das telas do servidor web
 │   ├── hardware/                 # guia de ligação de cada placa
 │   ├── CHANGELOG.md, user_guide.md, notes_tips.md, todo_issue_list.md
 └── hardware_design/              # placa-mãe e caixa do projeto original (referência)

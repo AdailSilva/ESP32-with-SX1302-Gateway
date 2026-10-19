@@ -12,7 +12,12 @@
 - platformio.ini: environments esp32dev and esp32s3 only (esp32s3 with opi flash, 32 MB)
 - README in pt-BR with colored pinout / wiring / architecture diagrams (doc/images/*.svg) and
   per-board wiring guides (doc/hardware/)
-- version numbering restarts at 0.0.1 for this repository (ESP32_SX1302_VERSION "0.0.1")
+- version numbering restarts at 0.0.1 for this repository
+- firmware version = Git tag: ESP32_SX1302_VERSION and the app descriptor come from FW_VERSION (CI) or
+  "git describe" (0.0.1, 0.0.1-3-gabc1234, 0.0.1-dirty); no version to edit by hand
+- releases: tag vX.Y.Z builds both boards and publishes, per board, a single image to write at 0x0
+  (-full.bin), the application only (-app.bin) and the separate parts (-parts.zip), plus SHA256SUMS.txt;
+  release notes come from the CHANGELOG section of the version; vX.Y.Z-rc1 tags are pre-releases
 
 
 ---
