@@ -20,7 +20,7 @@ License: Revised BSD License, see LICENSE.TXT file include in the project
 
 /* default login of the web page (can be changed in the page or with the console command "web_auth") */
 #define BASIC_AUTH_USERNAME "admin"
-#define BASIC_AUTH_PASSWORD "lorawan"
+#define BASIC_AUTH_PASSWORD "lorawan101"
 
 /* fake login used only by the "Sair" (logout) button; the web user can not be this one */
 #define WEB_LOGOUT_USER "_logout_"

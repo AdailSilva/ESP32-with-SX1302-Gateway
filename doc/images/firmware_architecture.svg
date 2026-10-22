@@ -18,7 +18,7 @@
 <text x="1000.0" y="150.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="middle" font-weight="normal" >Página web (pt-BR) · /logs · /diag</text>
 <text x="1000.0" y="169.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12.5" fill="#334155" text-anchor="middle" font-weight="normal" >Console serial ESP32_SX1302&gt;</text>
 <rect x="90" y="232" width="1060" height="46" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
-<text x="620.0" y="261.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#0f172a" text-anchor="middle" font-weight="600" >Wi-Fi  ·  Station (DHCP ou IP fixo)  |  Soft AP de configuração 192.168.4.1  ·  NTP (br.pool.ntp.org)</text>
+<text x="620.0" y="261.0" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="13.5" fill="#0f172a" text-anchor="middle" font-weight="600" >Wi-Fi  ·  Station (DHCP ou IP fixo)  |  Soft AP de configuração 192.168.101.101  ·  NTP (br.pool.ntp.org)</text>
 <line x1="240" y1="230" x2="240" y2="196" stroke="#0891b2" stroke-width="3" marker-end="url(#ah0891b2)" marker-start="url(#ahs0891b2)"/>
 <line x1="620" y1="230" x2="620" y2="196" stroke="#16a34a" stroke-width="3" marker-end="url(#ah16a34a)" marker-start="url(#ahs16a34a)"/>
 <line x1="1000" y1="230" x2="1000" y2="196" stroke="#ca8a04" stroke-width="3" marker-end="url(#ahca8a04)" marker-start="url(#ahsca8a04)"/>

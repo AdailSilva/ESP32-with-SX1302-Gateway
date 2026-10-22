@@ -83,7 +83,7 @@ Legenda: ✅ disponível · 🧪 disponível, falta validar em campo · 🗓️ 
 | Função | ESP32 | ESP32-S3 |
 |---|:---:|:---:|
 | Wi-Fi **Station** com DHCP ou **IP fixo** (IP, máscara, gateway, DNS 1 e 2) | ✅ | ✅ |
-| Wi-Fi **Soft AP** de configuração (`192.168.4.1`), por botão ou falha de conexão | ✅ | ✅ |
+| Wi-Fi **Soft AP** de configuração (`192.168.101.101`), por botão ou falha de conexão | ✅ | ✅ |
 | NTP configurável (padrão `br.pool.ntp.org`) | ✅ | ✅ |
 | Packet forwarder **UDP Semtech** (ChirpStack Gateway Bridge, porta 1700) | ✅ | ✅ |
 | **MQTT / MQTTS**: TLS com CA própria ou bundle público, **mTLS** (certificado + chave do cliente), usuário/senha | ✅ | ✅ |
@@ -104,7 +104,7 @@ Legenda: ✅ disponível · 🧪 disponível, falta validar em campo · 🗓️ 
 | **Log ao vivo** no navegador (`/logs`), com filtro, pausa e download (buffer circular de 16 KB) | ✅ | ✅ |
 | **Diagnóstico de rede** (`/diag`): ping, traceroute e nslookup | ✅ | ✅ |
 | Envio de certificados MQTT pela página | ✅ | ✅ |
-| Login da página (padrão `admin` / `lorawan`), troca de senha e logout | ✅ | ✅ |
+| Login da página (padrão `admin` / `lorawan101`), troca de senha e logout | ✅ | ✅ |
 | **Console serial** `ESP32_SX1302>` (`config`, `mqtt`, `mqtt_cert`, `web_auth`, `pkt_fwd`, `reboot`) | ✅ | ✅ |
 | Web e console gravam as mesmas configurações na NVS | ✅ | ✅ |
 | Diagnóstico de fiação do SX1302 quando o concentrador não inicia | ✅ | ✅ |
@@ -293,9 +293,9 @@ Para gravar um binário baixado, use os endereços de `flasher_args-<alvo>.json`
 
 1. Ligue o gateway **com a antena LoRa conectada**.
 2. Na primeira vez (ou segurando o botão **BOOT** logo depois do reset), ele sobe em **Soft AP**:
-   - Rede Wi-Fi: **`esp32`**, senha **`esp32wifi`**.
-   - Abra **http://192.168.4.1** (é *http*, não *https*).
-   - Login da página: **`admin` / `lorawan`**. Troque a senha na seção *Acesso a esta página*.
+   - Rede Wi-Fi: **`esp32`**, senha **`lorawan101`**.
+   - Abra **http://192.168.101.101** (é *http*, não *https*).
+   - Login da página: **`admin` / `lorawan101`**. Troque a senha na seção *Acesso a esta página*.
 3. Configure o **Wi-Fi Station**, o **plano de frequência** (AU915 SB1 é o padrão), o **Gateway ID** e o modo de envio (**UDP** ou **MQTT**). Salve e reinicie.
 4. No ChirpStack, cadastre o gateway com o mesmo **Gateway ID**.
 5. No monitor serial, o boot deve mostrar:
@@ -311,7 +311,7 @@ I (...) gw_mqtt: connected to the broker          ← quando o MQTT está ligado
 
 O gateway traz um servidor HTTP próprio (`esp_http_server`, porta **80**) com quatro telas: **Configuração** (com o painel de status), **Logs**, **Diagnósticos** e o **JSON dos planos de frequência**, além das páginas curtas de confirmação. Tudo fica gravado na flash do firmware, não depende de internet nem de CDN e funciona igual no ESP32 e no ESP32-S3.
 
-- **Endereço:** `http://192.168.4.1` em Soft AP, ou o IP que o roteador entregou (ou o IP fixo configurado) em Station. É *http*, não *https*.
+- **Endereço:** `http://192.168.101.101` em Soft AP, ou o IP que o roteador entregou (ou o IP fixo configurado) em Station. É *http*, não *https*.
 - **Tema:** claro ou escuro, conforme o tema do sistema operacional/navegador (`prefers-color-scheme`). `/w` é um apelido de `/` mantido por compatibilidade.
 - **Celular:** todas as telas se adaptam a telas estreitas (menu vira uma lista de botões, cartões em 2 colunas, campos em 1 coluna).
 - **Código:** `main/packet_forwarder/webpage.html` (configuração), `logs_page.h`, `diag_page.h` e as páginas curtas em `http_server.c`. Depois de editar o `webpage.html`, rode `scripts/gen_headers.sh` (o `build.sh` já faz isso).
@@ -324,9 +324,9 @@ Todas as páginas e chamadas usam **HTTP Basic Auth**. O navegador abre a janela
 
 | Item | Detalhe |
 |---|---|
-| Login padrão | `admin` / `lorawan` |
+| Login padrão | `admin` / `lorawan101` |
 | Trocar | Seção **Acesso** da página ou `web_auth --user <u> --pass <p>` no console. Vale **na hora**, sem reiniciar |
-| Esqueceu a senha | `web_auth --reset` no console serial (volta para `admin` / `lorawan`) |
+| Esqueceu a senha | `web_auth --reset` no console serial (volta para `admin` / `lorawan101`) |
 | Regras | Usuário de 1 a 31 caracteres; senha de 6 a 31; nenhum dos dois pode ter `:`; o usuário `_logout_` é reservado |
 | Sair | Link **Sair** no topo de qualquer tela. Pede confirmação, troca o login guardado pelo navegador por um login falso (`_logout_`) e abre a tela **Você saiu**. O próximo acesso pede usuário e senha de novo |
 | Sem login | Só `/favicon.svg`, `/favicon.ico` e `/saiu` |
@@ -462,7 +462,7 @@ As configurações de MQTT valem assim que você clica em **Salvar**; não preci
 </p>
 
 - **Modo Station:** conecta na rede Wi-Fi configurada (uso normal).
-- **Modo Soft AP:** na próxima vez sobe a rede `esp32` (senha `esp32wifi`) para configurar em `192.168.4.1`. O botão **BOOT** logo após o reset faz o mesmo sem mexer nesta opção.
+- **Modo Soft AP:** na próxima vez sobe a rede `esp32` (senha `lorawan101`) para configurar em `192.168.101.101`. O botão **BOOT** logo após o reset faz o mesmo sem mexer nesta opção.
 
 <p align="center">
   <img src="doc/images/web/web_07_access.png" alt="Seção Acesso" width="100%"/>
@@ -495,7 +495,7 @@ Antes de enviar, a página confere os campos e lista todos os problemas de uma v
 | Usuário da página | 1 a 31 caracteres, sem `:` |
 | Nova senha da página | Mínimo de 6 caracteres, sem `:`, igual à confirmação |
 
-O firmware também confere o login: se um usuário ou senha inválido chegar a ser gravado (vazio, longo demais, com `:` ou o usuário `_logout_`), ele volta a usar o padrão `admin` / `lorawan`.
+O firmware também confere o login: se um usuário ou senha inválido chegar a ser gravado (vazio, longo demais, com `:` ou o usuário `_logout_`), ele volta a usar o padrão `admin` / `lorawan101`.
 
 #### 1.9 Telas de confirmação
 
@@ -599,9 +599,9 @@ Os links **JSON** da seção Rádio LoRa abrem o `global_conf.json` embutido de 
 Exemplo com `curl` na rede local:
 
 ```bash
-curl -s -u admin:lorawan http://192.168.1.50/status | jq .gw.rx
-curl -s -u admin:lorawan -o gw.log http://192.168.1.50/logs_download
-curl -s -u admin:lorawan "http://192.168.1.50/diag_run?t=ping&h=8.8.8.8"
+curl -s -u admin:lorawan101 http://192.168.1.50/status | jq .gw.rx
+curl -s -u admin:lorawan101 -o gw.log http://192.168.1.50/logs_download
+curl -s -u admin:lorawan101 "http://192.168.1.50/diag_run?t=ping&h=8.8.8.8"
 ```
 
 ---
@@ -619,7 +619,7 @@ As telas, os campos e todos os endereços HTTP estão em [Servidor web embutido]
 | `config` | Mostra e altera tudo o que a página altera: `--region`, `--radio0/1`, `--ntp`, `--mode station\|soft_ap`, `--ssid`, `--wifi-pass`, `--host`, `--port`, `--gwid`, `--ip-mode dhcp\|static`, `--ip`, `--mask`, `--gw`, `--dns1/2`, `--reboot` |
 | `mqtt` | `--on`/`--off`, `--uri mqtts://host:8883`, `--user`, `--pass`, `--topic`, `--format chirpstack\|semtech`, `--encoding json\|protobuf` |
 | `mqtt_cert` | Grava a CA, o certificado ou a chave do cliente (cole o PEM no terminal) |
-| `web_auth` | Troca o usuário/senha da página (`--reset` volta para `admin`/`lorawan`) |
+| `web_auth` | Troca o usuário/senha da página (`--reset` volta para `admin`/`lorawan101`) |
 | `pkt_fwd` | Inicia o forwarder pela linha de comando |
 | `reboot` | Reinicia o gateway |
 

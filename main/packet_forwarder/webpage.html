@@ -156,7 +156,7 @@ main{padding-top:16px}.top{position:static}.top>div{padding:10px 14px}.chips{ord
 <div class="fl">
 <div class="opts c2">
 <label class="opt"><input type='radio' name='wifi_mode' value='station'><div><b>Modo Station</b><small>Conecta na rede Wi-Fi configurada (uso normal).</small></div></label>
-<label class="opt"><input type='radio' name='wifi_mode' value='soft_ap'><div><b>Modo Soft AP</b><small>Cria a rede “esp32” (senha esp32wifi) para configurar em 192.168.4.1.</small></div></label>
+<label class="opt"><input type='radio' name='wifi_mode' value='soft_ap'><div><b>Modo Soft AP</b><small>Cria a rede “esp32” (senha lorawan101) para configurar em 192.168.101.101.</small></div></label>
 </div>
 </div></section>
 
@@ -265,7 +265,7 @@ main{padding-top:16px}.top{position:static}.top>div{padding:10px 14px}.chips{ord
 <div class="f"><label class="l" for="wp">Nova senha</label><input type='password' id="wp" autocomplete="new-password" maxlength="31" placeholder="vazio mantém a atual" name='web_pswd'></div>
 <div class="f"><label class="l" for="wp2">Confirmar nova senha</label><input type="password" id="wp2" autocomplete="new-password" maxlength="31"></div>
 </div>
-<p class="hint">Mínimo de 6 caracteres. Depois de salvar, o navegador pede o novo login. Esqueceu? No console serial: <code>web_auth --reset</code> (volta para admin / lorawan).</p>
+<p class="hint">Mínimo de 6 caracteres. Depois de salvar, o navegador pede o novo login. Esqueceu? No console serial: <code>web_auth --reset</code> (volta para admin / lorawan101).</p>
 </div></section>
 
 <div class="bar" id="bar">
@@ -357,7 +357,7 @@ fetch("status",{cache:"no-store"}).then(function(r){return r.json()}).then(funct
 document.addEventListener("visibilitychange",function(){if(!document.hidden)st()});
 st();
 $("cip").textContent=location.hostname||"-";
-if(!f.ip_addr.value&&/^\d+\.\d+\.\d+\.\d+$/.test(location.hostname)&&location.hostname!="192.168.4.1"){f.ip_addr.placeholder=location.hostname;f.ip_gw.placeholder=location.hostname.replace(/\.\d+$/,".1")}
+if(!f.ip_addr.value&&/^\d+\.\d+\.\d+\.\d+$/.test(location.hostname)&&location.hostname!="192.168.101.101"){f.ip_addr.placeholder=location.hostname;f.ip_gw.placeholder=location.hostname.replace(/\.\d+$/,".1")}
 var dirty=0;function mark(){if(dirty)return;dirty=1;$("bar").classList.add("chg");$("dt").textContent="Alterações não salvas"}
 f.addEventListener("change",function(ev){upd();if(ev.target.type!="file")mark()});f.addEventListener("input",function(ev){if(ev.target.name=="gw_id"||ev.target.name=="ip_gw")upd();if(ev.target.tagName!="TEXTAREA")mark()});
 addEventListener("beforeunload",function(ev){if(dirty&&!f._s){ev.preventDefault();ev.returnValue=""}});

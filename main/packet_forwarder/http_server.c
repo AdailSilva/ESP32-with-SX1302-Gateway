@@ -131,7 +131,7 @@ void web_auth_register_console(void)
 {
     web_auth_args.user  = arg_str0(NULL, "user", "<user>", "new web user");
     web_auth_args.pass  = arg_str0(NULL, "pass", "<password>", "new web password (min. 6 characters)");
-    web_auth_args.reset = arg_lit0(NULL, "reset", "back to the default login admin / lorawan");
+    web_auth_args.reset = arg_lit0(NULL, "reset", "back to the default login admin / lorawan101");
     web_auth_args.end   = arg_end(3);
     const esp_console_cmd_t cmd = {
         .command = "web_auth",

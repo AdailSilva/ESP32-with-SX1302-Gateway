@@ -22,11 +22,11 @@ The 2 configuration ways are:
 
 By default, the gateway boots to the Soft AP mode for the first time. It switches modes when necessary such as Wi-Fi disconnected or be controlled by user. But you can always specify which mode it boots into: just keep one of the Interface board buttons pressed during the poweron: Left button for Soft AP mode, while right button for Station mode.
 
-In the Soft AP mode, user can connect the gateway by Wi-Fi. All the useful information can be seen from the screen, which is: `IP = "192.168.4.1"`; `username = esp32`; `password = esp32wifi`.
+In the Soft AP mode, user can connect the gateway by Wi-Fi. All the useful information can be seen from the screen, which is: `IP = "192.168.101.101"`; `Wi-Fi SSID = esp32`; `Wi-Fi password = lorawan101`.
 
-Now user can access the web UI by browser with address: `http://192.168.4.1`. Please be noted that the protocol is **http**, not **https**. The default login information are: `username = admin`; `password = lorawan`. It can be changed in the section "Acesso a esta página" of the web page or on the serial console with `web_auth --user <u> --pass <p>`; `web_auth --reset` restores the default. The "Sair" link at the top of the configuration and log pages logs out: the browser asks for user and password again on the next access (the user name `_logout_` is reserved for this).
+Now user can access the web UI by browser with address: `http://192.168.101.101`. Please be noted that the protocol is **http**, not **https**. The default login information are: `username = admin`; `password = lorawan101`. It can be changed in the section "Acesso a esta página" of the web page or on the serial console with `web_auth --user <u> --pass <p>`; `web_auth --reset` restores the default. The "Sair" link at the top of the configuration and log pages logs out: the browser asks for user and password again on the next access (the user name `_logout_` is reserved for this).
 
-If the gateway boots to Station mode, then both the gateway and user needs to connect to the same wireless router. Then the only difference is user needs to get the right IP address showing on the screen or provided by the router, and access the web UI with that IP address. It **won't** be the "192.168.4.1" any more.
+If the gateway boots to Station mode, then both the gateway and user needs to connect to the same wireless router. Then the only difference is user needs to get the right IP address showing on the screen or provided by the router, and access the web UI with that IP address. It **won't** be the "192.168.101.101" any more.
 
 There are also some Wi-Fi mode automatic switch if some events happens:
 - In Soft AP mode, if no changes to the web UI and no input to the command line, it reboots to Station mode in 10 minutes.

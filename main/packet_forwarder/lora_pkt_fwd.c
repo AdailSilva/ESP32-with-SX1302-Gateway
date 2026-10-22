@@ -172,9 +172,14 @@ License: Revised BSD License, see LICENSE.TXT file include in the project
 
 /* for wifi configures */
 #define ESP_WIFI_SSID      "esp32"
-#define ESP_WIFI_PASS      "esp32wifi"
+#define ESP_WIFI_PASS      "lorawan101"
 #define ESP_WIFI_CHANNEL   1
 #define MAX_STA_CONN       4
+/* Soft AP addressing (ESP-IDF default would be 192.168.4.1/24).
+ * DHCP leases handed to the clients start right after ESP_WIFI_AP_IP. */
+#define ESP_WIFI_AP_IP      "192.168.101.101"
+#define ESP_WIFI_AP_GW      "192.168.101.1"
+#define ESP_WIFI_AP_MASK    "255.255.255.0"
 
 #define WIFI_MAXIMUM_RETRY  5
 
@@ -4317,7 +4322,21 @@ void wifi_init_soft_ap(void)
 {
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
-    esp_netif_create_default_wifi_ap();
+    esp_netif_t *ap_netif = esp_netif_create_default_wifi_ap();
+
+    /* fixed Soft AP address: stop the DHCP server, set the IP, start it again */
+    esp_netif_ip_info_t ap_ip = { 0 };
+    esp_netif_str_to_ip4(ESP_WIFI_AP_IP,   &ap_ip.ip);
+    esp_netif_str_to_ip4(ESP_WIFI_AP_GW,   &ap_ip.gw);
+    esp_netif_str_to_ip4(ESP_WIFI_AP_MASK, &ap_ip.netmask);
+    esp_netif_dhcps_stop(ap_netif);
+    if (esp_netif_set_ip_info(ap_netif, &ap_ip) != ESP_OK) {
+        ESP_LOGE(WIFI_TAG, "Soft AP: failed to set IP %s, keeping the default", ESP_WIFI_AP_IP);
+    }
+    esp_netif_dhcps_start(ap_netif);
+
+    esp_netif_get_ip_info(ap_netif, &ap_ip);       /* what is really in use */
+    snprintf(self_ip, sizeof self_ip, IPSTR, IP2STR(&ap_ip.ip));
 
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     ESP_ERROR_CHECK(esp_wifi_init(&cfg));
@@ -4346,8 +4365,8 @@ void wifi_init_soft_ap(void)
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_AP, &wifi_config));
     ESP_ERROR_CHECK(esp_wifi_start());
 
-    ESP_LOGI(WIFI_TAG, "wifi_init_soft_ap finished. SSID:%s password:%s channel:%d",
-             ESP_WIFI_SSID, ESP_WIFI_PASS, ESP_WIFI_CHANNEL);
+    ESP_LOGI(WIFI_TAG, "wifi_init_soft_ap finished. SSID:%s password:%s channel:%d IP:%s",
+             ESP_WIFI_SSID, ESP_WIFI_PASS, ESP_WIFI_CHANNEL, self_ip);
 }
 
 
@@ -4597,7 +4616,7 @@ void usage(void) {
     printf(" mqtt_cert <ca|crt|key> [clear]  install (paste PEM) / remove a certificate\n");
     printf("\n ---- web page login ----\n");
     printf(" web_auth                     show the web user\n");
-    printf(" web_auth --user u --pass p   change it      web_auth --reset   back to admin / lorawan\n");
+    printf(" web_auth --user u --pass p   change it      web_auth --reset   back to admin / lorawan101\n");
 }
 
 // Note: No Error Checking!
@@ -4756,7 +4775,9 @@ void app_main(void)
         ESP_LOGI(BOOT_TAG, "ESP_WIFI_MODE_SOFT_AP");
         wifi_init_soft_ap();
 
-        oled_show_one_line(0, 3, "IP=192.168.4.1", 2);
+        /* small font: "IP=192.168.101.101" does not fit the large one */
+        snprintf(out_info, sizeof out_info, "IP=%s", (char *)self_ip);
+        oled_show_one_line(0, 3, out_info, 1);
         oled_show_one_line(0, 5, "Soft AP mode", 1);
 
         sprintf(out_info, "SSID=%s", ESP_WIFI_SSID);
