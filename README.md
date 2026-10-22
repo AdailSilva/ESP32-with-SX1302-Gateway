@@ -104,6 +104,7 @@ Legenda: ✅ disponível · 🧪 disponível, falta validar em campo · 🗓️ 
 | **Log ao vivo** no navegador (`/logs`), com filtro, pausa e download (buffer circular de 16 KB) | ✅ | ✅ |
 | **Diagnóstico de rede** (`/diag`): ping, traceroute e nslookup | ✅ | ✅ |
 | Envio de certificados MQTT pela página | ✅ | ✅ |
+| **Exportar / importar** a configuração em JSON (seção *Manutenção*), sem senhas nem certificados | ✅ | ✅ |
 | Login da página (padrão `admin` / `lorawan101`), troca de senha e logout | ✅ | ✅ |
 | **Console serial** `ESP32_SX1302>` (`config`, `mqtt`, `mqtt_cert`, `web_auth`, `pkt_fwd`, `reboot`) | ✅ | ✅ |
 | Web e console gravam as mesmas configurações na NVS | ✅ | ✅ |
@@ -351,7 +352,7 @@ As senhas (Wi-Fi, MQTT e da página) **nunca** voltam para o navegador: os campo
 | Plano | Plano de frequência marcado (AU915 SB0/SB1, US915, EU868, CN470). Muda ao clicar em outro |
 | Logs · Diagnósticos · Sair | Atalhos para as outras telas e para encerrar a sessão |
 
-**Menu lateral:** Status, Rede Wi-Fi, Servidor LoRaWAN, MQTT, Rádio LoRa, Inicialização e Acesso. Clicar rola até a seção; ao rolar a página, o item da seção visível fica marcado.
+**Menu lateral:** Status, Rede Wi-Fi, Servidor LoRaWAN, MQTT, Rádio LoRa, Inicialização, Acesso e Manutenção. Clicar rola até a seção; ao rolar a página, o item da seção visível fica marcado.
 
 #### 1.1 Painel de status
 
@@ -470,7 +471,44 @@ As configurações de MQTT valem assim que você clica em **Salvar**; não preci
 
 - **Usuário**, **Nova senha** e **Confirmar nova senha** da própria página. Senha vazia mantém a atual. Ao salvar uma troca, o navegador pede o novo login.
 
-#### 1.8 Salvar, reiniciar e validação
+#### 1.8 Manutenção: exportar e importar
+
+<p align="center">
+  <img src="doc/images/web/web_19_maintenance.png" alt="Seção Manutenção" width="100%"/>
+</p>
+
+- **Exportar configuração:** baixa `gateway_<GatewayID>_<AAAAMMDD>.json` com a configuração **salva** no gateway (lida de `GET /config.json`), não com o que estiver digitado e ainda não salvo. Ficam de fora as senhas (Wi-Fi, MQTT e página) e os certificados TLS: esses nunca saem do gateway.
+- **Importar…:** escolha um JSON exportado. Os valores vão para o formulário, e nada é gravado ainda. Revise, informe as senhas se for um gateway novo e clique em **Salvar**. Campos vazios no arquivo mantêm o valor atual, como no formulário.
+- O arquivo traz `_type: "esp32_sx1302"`, a versão do firmware e a placa (`_target`). Um JSON exportado por um **nó** LoRaWAN é recusado. Um arquivo de outra origem só é carregado depois de confirmar.
+- Serve para cópia de segurança e para configurar vários gateways iguais: exporte de um, importe nos outros e troque o **Gateway ID**, que precisa ser único.
+
+Formato do arquivo (os valores são os mesmos gravados na NVS; `""` = não definido):
+
+```json
+{
+  "_type": "esp32_sx1302",
+  "_version": "0.0.1",
+  "_target": "esp32",
+  "wifi_ssid": "MinhaRede-2G",
+  "ns_host": "",
+  "ns_port": "",
+  "gw_id": "E45F01FFFE10E12E",
+  "wifi_mode": "station",
+  "freq_region": "au915_sb1",
+  "mqtt_en": "on",
+  "mqtt_uri": "mqtts://mqtt.exemplo.com.br:8883",
+  "mqtt_fmt": "chirpstack",
+  "mqtt_enc": "protobuf",
+  "web_user": "admin",
+  "ip_mode": "static",
+  "ip_addr": "192.168.18.101",
+  "ip_gw": "192.168.18.1"
+}
+```
+
+(trecho; o arquivo real traz todos os campos da página.)
+
+#### 1.9 Salvar, reiniciar e validação
 
 A barra do rodapé mostra *“Nenhuma alteração”* ou, com um ponto laranja, *“Alterações não salvas”*. Se você tentar sair da página com alterações pendentes, o navegador avisa.
 
@@ -497,7 +535,7 @@ Antes de enviar, a página confere os campos e lista todos os problemas de uma v
 
 O firmware também confere o login: se um usuário ou senha inválido chegar a ser gravado (vazio, longo demais, com `:` ou o usuário `_logout_`), ele volta a usar o padrão `admin` / `lorawan101`.
 
-#### 1.9 Telas de confirmação
+#### 1.10 Telas de confirmação
 
 <p align="center">
   <img src="doc/images/web/web_10_saved.png" alt="Configuração salva" width="70%"/>
@@ -585,6 +623,7 @@ Os links **JSON** da seção Rádio LoRa abrem o `global_conf.json` embutido de 
 | POST | `/resp` | ✅ | Recebe o formulário, grava na NVS, aplica MQTT e login, devolve *Configuração salva* |
 | POST | `/reboot` | ✅ | Página *Reiniciando…* e reinício do ESP32 |
 | GET | `/status` | ✅ | `{"gw":{...},"mqtt":{...}}`: uptime, heap, RSSI, temperatura, contadores de RX/TX/UDP e estado do MQTT |
+| GET | `/config.json` | ✅ | Configuração salva em JSON (usada por *Exportar configuração*), sem senhas e sem certificados |
 | POST | `/mqtt_cert?type=ca\|crt\|key` | ✅ | Corpo = PEM (vazio remove). `{"ok":true}` ou `{"ok":false,"error":"..."}`; acima de 8 KB, `413` |
 | GET | `/logs` | ✅ | Página de logs |
 | GET | `/logs_data?from=<n>` | ✅ | Texto novo desde a posição `n`; cabeçalhos `X-Log-Start` e `X-Log-Next` |
@@ -600,6 +639,7 @@ Exemplo com `curl` na rede local:
 
 ```bash
 curl -s -u admin:lorawan101 http://192.168.18.101/status | jq .gw.rx
+curl -s -u admin:lorawan101 -o gateway.json http://192.168.18.101/config.json
 curl -s -u admin:lorawan101 -o gw.log http://192.168.18.101/logs_download
 curl -s -u admin:lorawan101 "http://192.168.18.101/diag_run?t=ping&h=8.8.8.8"
 ```

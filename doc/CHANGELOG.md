@@ -1,6 +1,16 @@
 # CHANGE LOG
 
 
+## Unreleased
+- web page: new "Manutenção" section with "Exportar configuração" (downloads gateway_<GatewayID>_<YYYYMMDD>.json)
+  and "Importar…" (fills the form from such a file; nothing is saved until "Salvar"); a node's file is refused
+- GET /config.json: saved configuration as JSON, without the Wi-Fi / MQTT / web passwords and without the
+  TLS certificates; httpd max_uri_handlers 20 -> 24 (21 handlers registered now)
+- Soft AP: fixed address 192.168.101.101/24 (gateway 192.168.101.1) instead of the ESP-IDF default 192.168.4.1;
+  the OLED shows the address read from the interface
+- Soft AP password esp32wifi -> lorawan101; default web login admin / lorawan -> admin / lorawan101
+
+
 ## v0.0.1 (first release of ESP32-with-SX1302-Gateway):
 - two supported boards, one source tree: ESP32-WROOM-32U DevKit (IDF_TARGET=esp32, current feature set)
   and ESP32-S3-WROOM-2 (N32R16V) DevKit (IDF_TARGET=esp32s3, current feature set + new features)

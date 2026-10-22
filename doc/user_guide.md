@@ -59,6 +59,11 @@ You can save your configurations whenever you like by clicking the **Apply** but
 
 If you don't like the default dark theme, you can try the light theme by accessing `http://<gateway_ip>/w` instead.
 
+**Backup (section "Manutenção").** "Exportar configuração" downloads `gateway_<GatewayID>_<YYYYMMDD>.json` with the
+saved settings (read from `GET /config.json`). The Wi-Fi, MQTT and web passwords and the TLS certificates are never
+exported. "Importar…" loads such a file into the form only: review it, type the passwords if needed and click
+"Salvar". A file exported by a LoRaWAN node is refused. To clone a gateway, import its file and change the Gateway ID.
+
 
 ## Configuration by command line
 

@@ -39,6 +39,8 @@ License: Revised BSD License, see LICENSE.TXT file include in the project
 #include "diag.h"
 #include "diag_page.h"
 #include "loragw_aux.h"
+#include "loragw_version.h"
+#include "sdkconfig.h"
 
 
 static const char *TAG = "esp32 web server";
@@ -543,6 +545,54 @@ static esp_err_t status_handler(httpd_req_t *req)
     return ESP_OK;
 }
 
+/* GET /config.json -> saved configuration, used by "Exportar configuração".
+ * Passwords (Wi-Fi, MQTT, page) and the TLS certificates never leave the
+ * gateway. Values are sent as they are stored in NVS ("" = not set, which the
+ * form treats as "keep the current value"). Sent in chunks: no big buffer. */
+static void cj_str(httpd_req_t *req, const char *s)
+{
+    char out[96];
+    size_t j = 0;
+
+    out[j++] = '"';
+    for (; s && *s; s++) {
+        unsigned char ch = (unsigned char)*s;
+        if (j > sizeof(out) - 8) { httpd_resp_send_chunk(req, out, j); j = 0; }
+        if (ch == '"' || ch == '\\') { out[j++] = '\\'; out[j++] = ch; }
+        else if (ch < 0x20) j += snprintf(out + j, sizeof(out) - j, "\\u%04x", ch);
+        else out[j++] = ch;
+    }
+    out[j++] = '"';
+    httpd_resp_send_chunk(req, out, j);
+}
+
+static void cj_kv(httpd_req_t *req, const char *key, const char *val)
+{
+    httpd_resp_send_chunk(req, ",\n  ", HTTPD_RESP_USE_STRLEN);
+    cj_str(req, key);
+    httpd_resp_send_chunk(req, ": ", HTTPD_RESP_USE_STRLEN);
+    cj_str(req, val ? val : "");
+}
+
+static esp_err_t config_json_handler(httpd_req_t *req)
+{
+    if (handle_basic_auth(req) == ESP_FAIL)
+        return ESP_FAIL;
+    httpd_resp_set_type(req, "application/json");
+    httpd_resp_set_hdr(req, "Cache-Control", "no-store");
+    httpd_resp_send_chunk(req, "{\n  \"_type\": \"esp32_sx1302\"", HTTPD_RESP_USE_STRLEN);
+    cj_kv(req, "_version", ESP32_SX1302_VERSION);
+    cj_kv(req, "_target", CONFIG_IDF_TARGET);
+    for (int i = 0; i < CONFIG_NUM; i++) {
+        if (i == WIFI_PASSWORD || i == MQTT_PSWD || i == WEB_PSWD)
+            continue;                                   /* secrets stay here */
+        cj_kv(req, config[i].name, i == WEB_USER ? web_username : cfg_value(i));
+    }
+    httpd_resp_send_chunk(req, "\n}\n", HTTPD_RESP_USE_STRLEN);
+    httpd_resp_send_chunk(req, NULL, 0);
+    return ESP_OK;
+}
+
 /* POST /mqtt_cert?type=ca|crt|key, body = PEM text (empty body removes it) */
 static esp_err_t mqtt_cert_handler(httpd_req_t *req)
 {
@@ -886,6 +936,13 @@ static const httpd_uri_t status_uri = {
     .user_ctx  = NULL
 };
 
+static const httpd_uri_t config_json_uri = {
+    .uri       = "/config.json",
+    .method    = HTTP_GET,
+    .handler   = config_json_handler,
+    .user_ctx  = NULL
+};
+
 static const httpd_uri_t mqtt_cert_uri = {
     .uri       = "/mqtt_cert",
     .method    = HTTP_POST,
@@ -984,7 +1041,7 @@ static httpd_handle_t start_web_server(void)
     httpd_handle_t server = NULL;
     httpd_config_t config = HTTPD_DEFAULT_CONFIG();
     config.lru_purge_enable = true;
-    config.max_uri_handlers = 20;  // 20 handlers registered (default limit is 8)
+    config.max_uri_handlers = 24;  // 21 handlers registered (default limit is 8), room for a few more
 
     ESP_LOGI(TAG, "Starting web server on port: '%d'", config.server_port);
 
@@ -1007,6 +1064,7 @@ static httpd_handle_t start_web_server(void)
         httpd_register_uri_handler(server, &favicon_svg_uri);
         httpd_register_uri_handler(server, &favicon_ico_uri);
         httpd_register_uri_handler(server, &status_uri);
+        httpd_register_uri_handler(server, &config_json_uri);
         httpd_register_uri_handler(server, &mqtt_cert_uri);
         httpd_register_uri_handler(server, &au915_sb0_json_conf);
         httpd_register_uri_handler(server, &au915_sb1_json_conf);
