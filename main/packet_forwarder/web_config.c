@@ -518,7 +518,7 @@ static int cmd_config(int argc, char **argv)
             } else if (esp_netif_str_to_ip4(a[i]->sval[0], &t) == ESP_OK) {
                 cfg_set(IP_ADDR + i, a[i]->sval[0]);
             } else {
-                printf("ERROR: --%s: IPv4 address like 192.168.1.50 (or 'none')\n", opt[i]);
+                printf("ERROR: --%s: IPv4 address like 192.168.18.101 (or 'none')\n", opt[i]);
                 return 1;
             }
             changed = true;

@@ -309,7 +309,7 @@ function chk(){var e=[],d=reg(),v;
 ["freq_radio0","freq_radio1"].forEach(function(n,i){v=f[n].value.trim();if(v&&(!/^\d{9}$/.test(v)||(d&&(v<d[2]*1e6||v>d[3]*1e6))))e.push("Rádio "+(i+1)+": use 9 dígitos em Hz"+(d?", entre "+d[2]+" e "+d[3]+" MHz.":"."))});
 v=f.wifi_pswd.value;if(v&&v.length<8)e.push("Senha do Wi-Fi: mínimo de 8 caracteres.");
 var ipm=ck("ip_mode");if(ipm&&ipm.value=="static"){var A={};if(!f.ip_mask.value.trim())f.ip_mask.value="255.255.255.0";
-[["ip_addr","Endereço IP",1],["ip_mask","Máscara",1],["ip_gw","Gateway",1],["ip_dns1","DNS primário",0],["ip_dns2","DNS secundário",0]].forEach(function(x){v=f[x[0]].value.trim();f[x[0]].value=v;if(!v){if(x[2])e.push(x[1]+": obrigatório com IP fixo.");return}A[x[0]]=ip4(v);if(A[x[0]]===null)e.push(x[1]+": use o formato 192.168.1.50.")});
+[["ip_addr","Endereço IP",1],["ip_mask","Máscara",1],["ip_gw","Gateway",1],["ip_dns1","DNS primário",0],["ip_dns2","DNS secundário",0]].forEach(function(x){v=f[x[0]].value.trim();f[x[0]].value=v;if(!v){if(x[2])e.push(x[1]+": obrigatório com IP fixo.");return}A[x[0]]=ip4(v);if(A[x[0]]===null)e.push(x[1]+": use o formato 192.168.18.101.")});
 if(A.ip_mask!=null&&(!A.ip_mask||!/^1*0*$/.test(A.ip_mask.toString(2).padStart(32,"0"))))e.push("Máscara: inválida (ex.: 255.255.255.0).");
 else if(A.ip_addr!=null&&A.ip_gw!=null&&A.ip_mask!=null){if(((A.ip_addr&A.ip_mask)>>>0)!==((A.ip_gw&A.ip_mask)>>>0))e.push("Gateway fora da rede do endereço IP (confira a máscara).");if(A.ip_addr===A.ip_gw)e.push("Endereço IP igual ao do gateway.")}}
 v=f.ns_host.value.trim();if(v&&!/^[0-9A-Za-z.-]+$/.test(v))e.push("Host: só IP ou domínio, sem http:// e sem espaços.");

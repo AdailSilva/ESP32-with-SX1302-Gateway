@@ -487,7 +487,7 @@ Antes de enviar, a página confere os campos e lista todos os problemas de uma v
 |---|---|
 | Rádio 1 / 2 | 9 dígitos em Hz, dentro da faixa do plano |
 | Senha do Wi-Fi | Mínimo de 8 caracteres |
-| IP fixo | IP, máscara e gateway obrigatórios, no formato `192.168.1.50`; máscara válida; gateway na mesma rede e diferente do IP |
+| IP fixo | IP, máscara e gateway obrigatórios, no formato `192.168.18.101`; máscara válida; gateway na mesma rede e diferente do IP |
 | Host | Só IP ou domínio, sem `http://` e sem espaços |
 | Porta | 1 a 65535 |
 | Gateway ID | Exatamente 16 caracteres de `0–9` e `A–F` |
@@ -599,9 +599,9 @@ Os links **JSON** da seção Rádio LoRa abrem o `global_conf.json` embutido de 
 Exemplo com `curl` na rede local:
 
 ```bash
-curl -s -u admin:lorawan101 http://192.168.1.50/status | jq .gw.rx
-curl -s -u admin:lorawan101 -o gw.log http://192.168.1.50/logs_download
-curl -s -u admin:lorawan101 "http://192.168.1.50/diag_run?t=ping&h=8.8.8.8"
+curl -s -u admin:lorawan101 http://192.168.18.101/status | jq .gw.rx
+curl -s -u admin:lorawan101 -o gw.log http://192.168.18.101/logs_download
+curl -s -u admin:lorawan101 "http://192.168.18.101/diag_run?t=ping&h=8.8.8.8"
 ```
 
 ---
